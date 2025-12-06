@@ -3,44 +3,58 @@
 
 #include "./libft_complete/ft_libft/libft.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <string.h>
+#include <termios.h>
+#include <sys/ioctl.h>
+//#include <readline/readline.h>
+//#include <readline/history.h>
 
 
 
-
-
+/* SRC functions */
+void	display_prompt(void);
+void	user_input(char *command, size_t size);
 
 /* ========================================================================= /
 / ESTRUCTURAS DE DATOS CLAVE /
 / ========================================================================= */
 
-// Representa una única redirección (>, <, >>, <<)
-ESTRUCTURA t_redireccion {
-TIPO_REDIR tipo;    // (p.ej., REDIR_IN, REDIR_OUT, HERE_DOC, APPEND)
-CADENA    archivo;  // Nombre del archivo o delimitador (para <<)
-}
+// // Representa una única redirección (>, <, >>, <<)
+// ESTRUCTURA t_redireccion {
+// TIPO_REDIR tipo;    // (p.ej., REDIR_IN, REDIR_OUT, HERE_DOC, APPEND)
+// CADENA    archivo;  // Nombre del archivo o delimitador (para <<)
+// }
 
-// Representa un comando simple dentro de una tubería (pipeline)
-ESTRUCTURA t_comando {
-ARRAY_CADENAS argumentos;  // cmd + args (p.ej., ["ls", "-l", NULL])
-LISTA_REDIR redirecciones; // Lista de t_redireccion
-ENTERO     fd_entrada;     // Descriptor de archivo de entrada (0 por defecto)
-ENTERO     fd_salida;      // Descriptor de archivo de salida (1 por defecto)
-}
+// // Representa un comando simple dentro de una tubería (pipeline)
+// ESTRUCTURA t_comando {
+// ARRAY_CADENAS argumentos;  // cmd + args (p.ej., ["ls", "-l", NULL])
+// LISTA_REDIR redirecciones; // Lista de t_redireccion
+// ENTERO     fd_entrada;     // Descriptor de archivo de entrada (0 por defecto)
+// ENTERO     fd_salida;      // Descriptor de archivo de salida (1 por defecto)
+// }
 
-// Representa el estado global del shell
-ESTRUCTURA t_shell_data {
-LISTA_CADENAS entorno;       // Lista ligada de variables de entorno (key=value)
-ENTERO       last_exit_status; // Variable $? (estado de salida del último comando)
-ENTERO       signal_flag;    // Bandera para indicar si se recibió una señal
-}
+// // Representa el estado global del shell
+// ESTRUCTURA t_shell_data {
+// LISTA_CADENAS entorno;       // Lista ligada de variables de entorno (key=value)
+// ENTERO       last_exit_status; // Variable $? (estado de salida del último comando)
+// ENTERO       signal_flag;    // Bandera para indicar si se recibió una señal
+// }
 
-// TIPO_REDIR (ENUM o constantes)
-TIPO_REDIR {
-REDIR_IN = 0,
-REDIR_OUT,
-APPEND,
-HERE_DOC,
-}
+// // TIPO_REDIR (ENUM o constantes)
+// TIPO_REDIR {
+// REDIR_IN = 0,
+// REDIR_OUT,
+// APPEND,
+// HERE_DOC,
+// }
 
 /* ------------------------------------------------------------------------- /
 / NOTAS IMPORTANTES DE ESTRUCTURAS /
