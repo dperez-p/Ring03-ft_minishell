@@ -14,6 +14,8 @@ OBJ_DIR	=		obj/
 SRC		=		main.c\
 				user_input.c\
 				display_prompt.c\
+				./command/execute_command.c\
+				
 
 SRCS	=		$(addprefix $(SRC_DIR), $(SRC))
 
