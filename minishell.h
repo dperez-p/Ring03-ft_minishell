@@ -144,5 +144,28 @@ void	append_env_node(t_lev **lev, t_lev *new_node);
 t_lev	**init_env_list(t_data *minishell);
 t_data	*init_minishell(char **ev);
 void	handle_error(int error_code);
+int		is_quote_char(char c);
+int		is_whitespace(char c);
+int		is_operator_char(char c);
+int		is_parenthesis_char(char c);
+int		is_special_char(char c);
+char	*concatenate(const char *s1, const char *s2, const char *s3);
+
+/* Parser*/
+t_ast	*parse_tokens(t_data *minishell, t_token *token);
+int		is_subshell(t_token *token);
+t_token	*find_main_operator(t_token *token);
+t_token	*remove_outer_parentheses(t_token *token);
+t_ast	*parse_subshell(t_data *minishell, t_token *token);
+t_ast	*parse_operator(t_data *minishell, t_token *token, t_token *operator);
+t_token	*search_pipeline(t_token *token);
+t_ast	*parse_token(t_token *token);
+t_ast	*build_tree(t_data *minishell, t_token *token);
+t_ast	*new_node(int id);
+t_ast	*parse_redir(t_data *minishell, t_token *token, t_token *operator);
+
+/* Signals */
+void	handle_heredoc(int signum);
+void	handle_sigint(void);
 
 #endif
