@@ -163,6 +163,11 @@ t_ast	*parse_token(t_token *token);
 t_ast	*build_tree(t_data *minishell, t_token *token);
 t_ast	*new_node(int id);
 t_ast	*parse_redir(t_data *minishell, t_token *token, t_token *operator);
+void	parse_heredoc(t_data *minishell, t_token *operator);
+void	remove_heredoc_files(t_data *minishell);
+
+/* Expansion*/
+
 
 /* Signals */
 void	handle_heredoc(int signum);

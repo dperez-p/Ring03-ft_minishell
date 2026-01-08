@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_signals.c                                   :+:      :+:    :+:   */
+/*   expand_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/06 19:43:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/06 19:44:32 by dperez-p         ###   ########.fr       */
+/*   Created: 2026/01/08 18:25:24 by dperez-p          #+#    #+#             */
+/*   Updated: 2026/01/08 19:05:27 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	handle_heredoc(int signum)
+/* Helper function to skip over single-quoted sections */
+static void	skip_single_quote(const char *line, int *i)
 {
-	(void)signum;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	(*i)++;
+	while (line[*i] && line[*i] != '\'')
+		(*i)++;
+	return ;
+}
+
+/* Function to expand variables in a line */
+char	*expand_variable(t_data *minishell, const char *line, int *i,
+	char *expanded)
+{
+	char	*var_name;
+	char	*var_value;
+	int		start;
+
+
 }
