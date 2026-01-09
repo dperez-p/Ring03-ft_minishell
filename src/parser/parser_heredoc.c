@@ -6,11 +6,13 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:32:20 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/08 19:06:30 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:35:11 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+
 
 static char	*expand_line(t_data *minishell, char *line)
 {
@@ -29,12 +31,13 @@ static char	*expand_line(t_data *minishell, char *line)
 			expanded = unquote_dollar(minishell, line, &i, &start);
 		else
 		{
-			expanded = append_char(expanded, line[i]);
+			expanded = ft_strjoin(expanded, line[i]);
 			if (!expanded)
 				handle_error(MALLOC);
 			i++;
 		}
 	}
+	free(line);
 	return (expanded);
 }
 

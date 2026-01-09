@@ -1,0 +1,102 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/09 18:59:31 by dperez-p          #+#    #+#             */
+/*   Updated: 2026/01/09 19:17:45 by dperez-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../minishell.h"
+
+/* Function to expand tilde (~) to home directory */
+static char	*expand_tilde(t_data *minishell, char *token)
+{
+	char	*home;
+	char	*expanded;
+
+	expanded = NULL;
+	if (token[0] != '~')
+		return (token);
+	home = get_env_value(minishell->lev, "HOME"); //missing function
+	if (!home)
+		return (token);
+	if (token[1] == '\0')
+		expanded = ft_strdup(home);
+	else if (token[1] == '/')
+		expanded = ft_strjoin(home, &token[1]);
+	else
+		return (token);
+	free(token);
+	return (expanded);
+}
+
+/* Helper function to handle special cases for dollar sign */
+static char	*handle_dollar_specual_case(t_data *minishell, char curr, int *i)
+{
+	(*i)++;
+	if (curr == '?')
+		return (ft_itoa(minishell->status));
+	return (NULL);
+}
+
+/* Function to handle dollar sign expansion in tokens */
+char	*handle_dollar(t_data *minishell, char *str, int *i)
+{
+	char	*curr;
+	char	*var_name;
+	char	*var_value;
+	char	*result;
+	int		len;
+
+	curr = str + 1;
+	if (*curr == '?')
+		return (handle_dollar_special_case(minishell, *curr, i));
+	len = 0;
+	while (curr[len] && (ft_isalnum(curr[len]) || curr[len] == '_'))
+		len++;
+	*i += len;
+	if (len == 0)
+		return (ft_strdup("$"));
+	var_name = malloc((len + 1) * sizeof(char));
+	ft_strlcpy(var_name, curr, len + 1);
+	var_value = get_env_value(minishell->lev, var_name);
+	if (!var_name)
+		result = ft_strdup("");
+	else
+		result = ft_strdup(var_value);
+	free(var_name);
+	return (result);
+}
+
+char	**expansor(t_data *minishell, char **tokens)
+{
+	char	**args;
+	char	**split;
+	char	*expanded;
+	int		i;
+	int		j;
+
+	args = malloc(1 * sizeof(char *));
+	i = 0;
+	while (tokens[i])
+	{
+		if (tokens[i][0] == '#')
+			break ;
+		expanded = expand_token(minishell, tokens[i]); //missing function
+		expanded = expand_tilde(minishell, expanded);
+		expanded = expand_wildcards(expanded); //missing function
+		split = split_tokens(expanded); //missing function
+		free(expanded);
+		j = 0;
+		while (split[j])
+			args = ft_arrappend(args, split[j++]); //missing function
+		ft_free_matrix(split);
+		i++;
+	}
+	ft_free_matrix(tokens);
+	return (args);
+}

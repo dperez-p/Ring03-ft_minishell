@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 18:25:24 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/08 19:05:27 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:59:09 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	skip_single_quote(const char *line, int *i)
 	return ;
 }
 
-/* Function to expand variables in a line */
-char	*expand_variable(t_data *minishell, const char *line, int *i,
-	char *expanded)
+char	*unquote_dollar(t_data *minishell, char *token, int *i, int *start)
 {
-	char	*var_name;
+	char	*expanded;
+	char	*tmp;
 	char	*var_value;
-	int		start;
 
+	expanded = ft_strdup("");
+	tmp = ft_syvstr(token, *start, *i - *start);
+	var_value = handle_dollar(minishell, &token[i], i);
 
-}
