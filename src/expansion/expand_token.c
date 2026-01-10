@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 18:25:24 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/09 18:59:09 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/10 20:07:00 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,32 @@ static void	skip_single_quote(const char *line, int *i)
 	return ;
 }
 
+/* Helper function to expand double-quoted sections */
+static char	*expand_double_quotes(t_data *minishell, char *token,
+	int *i, int *start)
+{
+	char	*expanded;
+	char	*tmp;
+	char	*var_value;
+
+	expanded = ft_strdup("");
+	(*i)++;
+	while (token[*i] && token[*i] != '\"')
+	{
+		if (token[*i] == '$')
+		{
+			tmp = ft_substr(token, *start, *i - *start);
+			var_value = handle_dollar(minishell, &token[*i], i);
+			expanded = concatenate(expanded, tmp, var_value);
+			free_both(tmp, var_value);
+			*start = *i + 1;
+		}
+		(*i)++;
+	}
+	return (expanded);
+}
+
+/* Function to expand tokens by handling quotes and dollar signs */
 char	*unquote_dollar(t_data *minishell, char *token, int *i, int *start)
 {
 	char	*expanded;
@@ -28,6 +54,48 @@ char	*unquote_dollar(t_data *minishell, char *token, int *i, int *start)
 	char	*var_value;
 
 	expanded = ft_strdup("");
-	tmp = ft_syvstr(token, *start, *i - *start);
-	var_value = handle_dollar(minishell, &token[i], i);
+	tmp = ft_substr(token, *start, *i - *start);
+	var_value = handle_dollar(minishell, &token[*i], i);
+	expanded = concatenate(expanded, tmp, var_value);
+	*start = *i + 1;
+	free(tmp);
+	free(var_value);
+	return (expanded);
+}
 
+/* Function to expand tokens, handling quotes and dollar signs */
+char	*expand_token(t_data *minishell, char *token)
+{
+	int		i;
+	int		start;
+	char	*expanded;
+	char	*tmp;
+
+	i = 0;
+	start = 0;
+	expanded = ft_strdup("");
+	while (token[i])
+	{
+		if (token[i] == '\'')
+			skip_single_quote(token, &i);
+		else if (token[i] == '\"')
+			expanded = concatenate(expanded,
+					expand_double_quotes(minishell, token, &i, &start), "");
+		else if (token[i] == '$')
+			expanded = concatenate(expanded,
+					unquote_dollar(minishell, token, &i, &start), "");
+		if (token[i])
+			i++;
+	}
+	tmp = ft_substr(token, start, i - start);
+	expanded = concatenate(expanded, tmp, "");
+	free_both(tmp, token);
+	return (expanded);
+}
+
+/* Helper function to free two strings */
+void	free_both(char *a, char *b)
+{
+	free(a);
+	free(b);
+}

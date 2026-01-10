@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:59:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/09 19:17:45 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:20:42 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*expand_tilde(t_data *minishell, char *token)
 	expanded = NULL;
 	if (token[0] != '~')
 		return (token);
-	home = get_env_value(minishell->lev, "HOME"); //missing function
+	home = get_env_value(minishell->lev, "HOME");
 	if (!home)
 		return (token);
 	if (token[1] == '\0')

@@ -167,10 +167,18 @@ void	parse_heredoc(t_data *minishell, t_token *operator);
 void	remove_heredoc_files(t_data *minishell);
 
 /* Expansion*/
-
+char	*expand_token(t_data *minishell, char *token);
+char	*handle_dollar(t_data *minishell, char *str, int *i);
+char	*expand_tilde(t_data *minishell, char *token);
+char	*get_env_value(t_list *lev, const char *var_name);
+void	free_both(char *a, char *b);
 
 /* Signals */
 void	handle_heredoc(int signum);
 void	handle_sigint(void);
+
+/* ev */
+t_lev	*findlev(t_lev *lev, const char *key);
+
 
 #endif
