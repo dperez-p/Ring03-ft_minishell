@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 09:54:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/10 19:09:31 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 13:07:55 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,26 @@ char	*get_env_value(t_list *lev, const char *var_name)
 	if (!env_var || !env_var->value)
 		return (NULL);
 	return (env_var->value);
+}
+
+/* Function to reallocate matches array with a new match */
+char	**realloc_matches_array(char **matches, const char *new_match,
+	int count)
+{
+	char	**new_array;
+	int		i;
+
+	new_array = malloc(sizeof(char *) * (count + 2));
+	if (!new_array)
+		handle_error(MALLOC);
+	i = 0;
+	while (i < count)
+	{
+		new_array[i] = matches[i];
+		i++;
+	}
+	new_array[i] = ft_strdup(new_match);
+	new_array[i + 1] = NULL;
+	free(matches);
+	return (new_array);
 }

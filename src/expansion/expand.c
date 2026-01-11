@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:59:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/10 19:20:42 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 13:28:49 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*expand_tilde(t_data *minishell, char *token)
 }
 
 /* Helper function to handle special cases for dollar sign */
-static char	*handle_dollar_specual_case(t_data *minishell, char curr, int *i)
+static char	*handle_dollar_special_case(t_data *minishell, char curr, int *i)
 {
 	(*i)++;
 	if (curr == '?')
@@ -86,14 +86,14 @@ char	**expansor(t_data *minishell, char **tokens)
 	{
 		if (tokens[i][0] == '#')
 			break ;
-		expanded = expand_token(minishell, tokens[i]); //missing function
+		expanded = expand_token(minishell, tokens[i]);
 		expanded = expand_tilde(minishell, expanded);
-		expanded = expand_wildcards(expanded); //missing function
-		split = split_tokens(expanded); //missing function
+		expanded = expand_wildcards(expanded);
+		split = split_tokens(expanded);
 		free(expanded);
 		j = 0;
 		while (split[j])
-			args = ft_arrappend(args, split[j++]); //missing function
+			args = realloc_matches_array(args, split[j++], ft_array_len(args));
 		ft_free_matrix(split);
 		i++;
 	}

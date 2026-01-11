@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/02 18:21:45 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 13:31:48 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	run(t_data *minishell)
 		if (minishell->input != NULL && !check_empty_input(minishell->input))
 		{
 			minishell->token = tokenize_input(minishell->input);
-			if (check_syntax(minishell, *minishell->input) == 0)
+			if (check_syntax(minishell, *minishell->token) == 0)
 			{
-				root = parse_tokens(minishell, minishell->token);
+				ast = build_tree(minishell, minishell->token);
 			}
 			
 		}

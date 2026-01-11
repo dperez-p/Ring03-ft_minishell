@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
+/*   Updated: 2026/01/11 13:29:44 by dperez-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -172,6 +185,15 @@ char	*handle_dollar(t_data *minishell, char *str, int *i);
 char	*expand_tilde(t_data *minishell, char *token);
 char	*get_env_value(t_list *lev, const char *var_name);
 void	free_both(char *a, char *b);
+char	**realloc_matches_array(char **matches, const char *new_match,
+			int count);
+void	ft_sort_string_array(char **array);
+char	*expand_wildcards(char *token);
+char	*array_to_string(char **array);
+char	**expansor(t_data *minishell, char **tokens);
+char	**split_tokens(char *expanded);
+char	*remove_quotes(char *str);
+
 
 /* Signals */
 void	handle_heredoc(int signum);
@@ -179,6 +201,10 @@ void	handle_sigint(void);
 
 /* ev */
 t_lev	*findlev(t_lev *lev, const char *key);
+t_lev	*create_env_node(char **arr_ev)
+t_lev	**init_env_list(t_data *minishell);
+char	**separate_ev(char *ev);
+void	append_env_node(t_lev **lev, t_lev *new_node);
 
 
 #endif

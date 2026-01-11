@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:37:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/30 19:16:03 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 13:34:28 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,26 @@ int	check_empy_input(const char *input)
 	return (1);
 }
 
-/* Check the overall syntax of the input */
-int	check_syntax(const char *input)
+/* Main syntax checking function */
+int	check_syntax(t_data *minishell, t_token *token)
 {
-	if (!check_open_syntax(input) || !check_special_chars(input))
-		return (print_error(SYNTAX, 2, NULL, NULL));
-	return (0);
+	int	status;
+
+	status = 0;
+	while (token)
+	{
+		if (token->id == AND || token->id == OR || token->id == PIPE)
+			status = operators_rule(token);
+		else if (token->id >= REDIR_IN && token->id <= APPEND)
+			status = redir_rule(token);
+		else if (token->id == PAREN_OPEN || token->id == PAREN_CLOSE)
+			status = paren_rule(token);
+		if (status)
+		{
+			update_exit_status(minishell, status);
+			return (status);
+		}
+		token = token->next;
+	}
+	return (status);
 }
