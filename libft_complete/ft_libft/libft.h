@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:34:03 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 12:30:28 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:41:55 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,15 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_array_len(char **array);
 
 int		ft_strcasecmp(const char *s1, const char *s2);
+
+void	clear_mem(void);
+
+void	deallocate_mem(void *content);
+
+void	*allocate_mem(size_t nmemb, size_t size);
+
+void	collect_mem(void *content);
+
+t_list	**get_memory_ptr(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 13:29:44 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:54:15 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,19 +150,13 @@ int		check_special_chars(const char *input);
 int		check_empty_input(const char *input);
 int		check_syntax(const char *input);
 
-/* Comands */
-
-void	execute_command(const char *command);
-void	append_env_node(t_lev **lev, t_lev *new_node);
-t_lev	**init_env_list(t_data *minishell);
-t_data	*init_minishell(char **ev);
-void	handle_error(int error_code);
-int		is_quote_char(char c);
-int		is_whitespace(char c);
-int		is_operator_char(char c);
-int		is_parenthesis_char(char c);
-int		is_special_char(char c);
+/* utils */
 char	*concatenate(const char *s1, const char *s2, const char *s3);
+void	close_fd(int *fd);
+int		skip_zeros(const char *num);
+void	handle_error(char *error);
+int		print_command_error(int res, char *args);
+int		print_error(int error, int res_num, char *cmd, char *arg);
 
 /* Parser*/
 t_ast	*parse_tokens(t_data *minishell, t_token *token);

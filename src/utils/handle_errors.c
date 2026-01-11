@@ -6,19 +6,21 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 19:17:13 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/30 19:25:00 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:35:04 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/* Fatal error handling function */
 void	handle_error(char *error)
 {
-	ft_printf("%s\n", error);
+	printf("%s\n", error);
 	clear_mem();
 	exit(EXIT_FAILURE);
 }
 
+/* Specific command error printing function */
 int	print_command_error(int res, char *args)
 {
 	if (res == -1)
@@ -31,6 +33,7 @@ int	print_command_error(int res, char *args)
 		return (print_error(INVALID_CMD, 127, args, NULL));
 }
 
+/* Helper function for print_error */
 static void	print_error2(int error, char *cmd, char *arg)
 {
 	if (error == DIR_CMD)
@@ -48,6 +51,7 @@ static void	print_error2(int error, char *cmd, char *arg)
 			arg);
 }
 
+/* General error printing function */
 int	print_error(int error, int res_num, char *cmd, char *arg)
 {
 	if (error == INVALID_OPTION)
@@ -56,7 +60,8 @@ int	print_error(int error, int res_num, char *cmd, char *arg)
 		ft_printf_fd(2, "minishell: %s: %s: doesn't accept arguments\n",
 			cmd, arg);
 	else if (error == INVALID_ID)
-		ft_printf_fd(2, "minishell: %s: %s: not a valid identifier\n", cmd, arg);
+		ft_printf_fd(2, "minishell: %s: %s: not a valid identifier\n",
+			cmd, arg);
 	else if (error == NUMERIC_ARG)
 		ft_printf_fd(2, "minishell: %s: %s: numeric argument required\n",
 			cmd, arg);

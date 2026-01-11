@@ -6,12 +6,13 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 20:16:06 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/06 19:38:39 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:52:21 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/* Concatenate three strings into a new string */
 char	*concatenate(const char *s1, const char *s2, const char *s3)
 {
 	char	*result1;
@@ -27,28 +28,28 @@ char	*concatenate(const char *s1, const char *s2, const char *s3)
 	return (result2);
 }
 
-int	is_space(char c)
+/* Close file descriptors if they are open */
+void	close_fd(int *fd)
 {
-	return (c == ' ' || (c >= 9 && c <= 13));
+	if (fd[0] != -1)
+	{
+		close(fd[0]);
+	}
+	if (fd[1] != -1)
+	{
+		close(fd[1]);
+	}
 }
 
-int	is_operator_char(char c)
+/* Skip leading zeros in a numeric string */
+int	skip_zeros(const char *num)
 {
-	return (c == '|' || c == '&' || c == '<' || c == '>');
-}
+	int	i;
 
-int	is_quote_char(char c)
-{
-	return (c == '\'' || c == '\"');
-}
-
-int	is_parenthesis_char(char c)
-{
-	return (c == '(' || c == ')');
-}
-
-int	is_special_char(char c)
-{
-	return (is_whitespace(c) || is_operator_char(c)
-		|| is_parenthesis_char(c));
+	i = 0;
+	if (num[i] == '-')
+		i++;
+	while (num[i] == '0')
+		i++;
+	return (i);
 }
