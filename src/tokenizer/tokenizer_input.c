@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:20:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/31 20:40:17 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:25:51 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_token	**tokenize_input(const char *input)
 	*tokens = NULL;
 	while (*input)
 	{
-		while (*input > 9 && *input < 13 || *input == 32 )
+		while (*input > 9 && *input < 13 || *input == 32)
 			input++;
 		if (*input)
 		{

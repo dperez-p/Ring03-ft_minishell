@@ -6,13 +6,11 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:32:20 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/09 18:35:11 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:27:04 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-
 
 static char	*expand_line(t_data *minishell, char *line)
 {

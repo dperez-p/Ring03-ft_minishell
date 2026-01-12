@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   ev_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/06 19:41:23 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:25:24 by dperez-p         ###   ########.fr       */
+/*   Created: 2026/01/10 19:09:44 by dperez-p          #+#    #+#             */
+/*   Updated: 2026/01/10 19:20:32 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/* Signal handler for SIGINT during heredoc input */
-void	handle_sigint(void)
+/* Function to find an environment variable by key in the linked list */
+t_lev	*findlev(t_lev *lev, const char *key)
 {
-	signal(SIGINT, handle_heredoc);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
+	while (lev)
+	{
+		if (ft_strcmp(lev->key, key) == 0)
+			return (lev);
+		lev = lev->next;
+	}
+	return (NULL);
 }

@@ -6,12 +6,13 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 09:54:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 13:07:55 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:46:02 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/* Expand env value */
 char	*get_env_value(t_list *lev, const char *var_name)
 {
 	t_lev	*env_var;

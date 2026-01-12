@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/21 18:54:38 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:23:51 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	execute_command(const char *command)
 	}
 	else if (child_pid == 0)
 	{
-		execlp(command, command, (char *)NULL);
+		execlp(command, command, (char *) NULL);
 		perror("execlp");
 		exit(EXIT_FAILURE);
 	}

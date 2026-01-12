@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:55:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/06 19:28:30 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:56:49 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_ast	*parse_token(t_token *token)
 
 t_ast	*parse_subshell(t_data *minishell, t_token *token)
 {
-	t_ast	*node;
+	t_ast	*node; //missing coment
 
 	token = remove_outer_parentheses(token);
 	node = new_node(SUBSHELL);
