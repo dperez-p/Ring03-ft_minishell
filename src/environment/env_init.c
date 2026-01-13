@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:38:14 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/30 18:23:17 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/13 18:59:26 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_lev	*create_env_node(char **arr_ev)
 
 	new_node = malloc(sizeof(t_lev));
 	if (!new_node)
-		handle_error(MALLOC_ERROR);
+		handle_error(MALLOC);
 	new_node->key = ft_strdup(arr_ev[0]);
 	new_node->value = ft_strdup("");
 	i = 1;
@@ -87,7 +87,7 @@ char	**separate_ev(char *ev)
 	{
 		equal_sign = ft_strdup(ev + len_key + 1);
 		if (!equal_sign)
-			handle_error(MALLOC_ERROR);
+			handle_error(MALLOC);
 	}
 	else
 		equal_sign = NULL;
@@ -110,7 +110,7 @@ t_lev	**init_env_list(t_data *minishell)
 	minishell->ev_num = ft_evlen(minishell->ev);
 	lev = malloc(sizeof(t_lev *));
 	if (!lev)
-		handle_error(MALLOC_ERROR);
+		handle_error(MALLOC);
 	*lev = NULL;
 	i = 0;
 	while (minishell->ev[i] != NULL)

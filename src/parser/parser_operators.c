@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:55:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:56:49 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/13 12:22:09 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,15 @@ t_ast	*parse_token(t_token *token)
 	return (node);
 }
 
+/* Parses a subshell expression into an AST node */
 t_ast	*parse_subshell(t_data *minishell, t_token *token)
 {
-	t_ast	*node; //missing coment
+	t_ast	*node;
 
 	token = remove_outer_parentheses(token);
 	node = new_node(SUBSHELL);
 	if (!node)
 		handle_error(MALLOC);
-	node->left = build_three(minishell, token);
+	node->left = build_tree(minishell, token);
 	return (node);
 }

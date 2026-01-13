@@ -6,11 +6,13 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:31:16 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/13 13:07:23 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+volatile sig_atomic_t	g_signal;
 
 /* Function to clean up minishell data structures */
 void	finish(t_data *minishell)
@@ -26,10 +28,17 @@ void	finish(t_data *minishell)
 	exit(exit_status);
 }
 
+/* Updates the exit status of minishell */
+void	update_exit_status(t_data *minishell, int status)
+{
+	minishell->status = status;
+	g_signal = 0;
+}
+
 /* Function to run the main loop of the shell */
 static void	run(t_data *minishell)
 {
-	t_ast	*ast;
+	t_root	*root;
 
 	while (1)
 	{
@@ -39,7 +48,18 @@ static void	run(t_data *minishell)
 		{
 			minishell->token = tokenize_input(minishell->input);
 			if (check_syntax(minishell, *minishell->token) == 0)
-				ast = build_tree(minishell, minishell->token);
+			{
+				root = build_tree(minishell, minishell->token);
+				if (!root)
+					handle_error(MALLOC);
+				minishell->ast = &root;
+				if (g_signal == SIGINT)
+					update_exit_status(minishell, SIGINT + 128);
+				else
+					update_exit_status(minishell, execute_command(minishell));
+				free_ast(root);
+				minishell->ast = NULL;
+			}
 		}
 	}
 }

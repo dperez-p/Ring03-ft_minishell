@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:29:08 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:52:22 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/13 13:00:49 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ast	*new_node(int id)
 }
 
 /* Frees the memory allocated for an AST node and its children */
-static void	free_ast(t_ast *node)
+void	free_ast(t_ast *node)
 {
 	int	i;
 

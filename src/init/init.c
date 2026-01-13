@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:19:42 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:30:26 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/13 18:22:23 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_data	*init_minishell(char **ev)
 
 	minishell = malloc(sizeof(t_data));
 	if (!minishell)
-		handle_error(MALLOC_ERROR);
+		handle_error(MALLOC);
 	minishell->prompt = YELLOW "minishell$ " RESET;
 	minishell->ev = ev;
 	minishell->status = 0;

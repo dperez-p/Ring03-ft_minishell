@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:55:57 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/13 19:02:10 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,19 @@ typedef struct s_data
 /* MAIN functions */
 int		main(int ac, char **av, char **ev);
 void	finish(t_data *minishell);
+void	update_exit_status(t_data *minishell, int status);
 
-/* Command */
-void	execute_command(const char *command);
+/* Exec */
+int		execute_command(t_data *minishell);
+int		loop_tree(t_data *minishell, t_ast *ast);
 
-/* Evnviroment */
+/* Ev */
 t_lev	*findlev(t_lev *lev, const char *key);
-t_lev	*findlev(t_lev *lev, const char *key);
+t_lev	*create_env_node(char **arr_ev);
+void	append_env_node(t_lev **lev, t_lev *new_node);
+char	**separate_ev(char *ev);
+t_lev	**init_env_list(t_data *minishell);
+char	**convert_lev_to_array(t_data *minishell);
 
 /* Expansion*/
 char	**split_tokens(char *expanded);
@@ -161,6 +167,7 @@ t_data	*init_minishell(char **ev);
 /* Input */
 int		check_syntax(t_data *minishell, t_token *token);
 char	*get_input(t_data *minishell);
+
 /* Parser */
 void	remove_heredoc_files(t_data *minishell);
 void	parse_heredoc(t_data *minishell, t_token *operator);
@@ -174,10 +181,13 @@ t_token	*remove_outer_parentheses(t_token *token);
 int		is_subshell(t_token *token);
 t_ast	*new_node(int id);
 t_ast	*build_tree(t_data *minishell, t_token *token);
+void	free_ast(t_ast *node);
 
 /* Signals */
 void	handle_heredoc(int signum);
 void	handle_sigint(void);
+void	setup_signal(int pid);
+void	handle_sigpipe(int signum);
 
 /* Tokenizer*/
 t_token	*create_token(char *value, int id);
@@ -194,5 +204,6 @@ int		print_error(int error, int res_num, char *cmd, char *arg);
 char	*concatenate(const char *s1, const char *s2, const char *s3);
 void	close_fd(int *fd);
 int		skip_zeros(const char *num);
+void	restore_fd(int *fd);
 
 #endif
