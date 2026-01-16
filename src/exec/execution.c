@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 18:34:04 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/16 10:58:27 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	loop_tree(t_data *minishell, t_ast *ast)
 			i++;
 		if (!ast->args[i])
 			return (0);
-		result = is_builtin(minishell, &ast->args[i]) //missing function
-		if (res == -1)
-			result = execution_route(minishell, &ast->args[i]); //missing function
+		result = command_menu(minishell, &ast->args[i]);
+		if (result == -1)
+			result = execution_route(minishell, &ast->args[i]);
 	}
 	else
 		result = operators_command(minishell, ast); //missing function

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 19:02:10 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:26:37 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,17 @@ int		main(int ac, char **av, char **ev);
 void	finish(t_data *minishell);
 void	update_exit_status(t_data *minishell, int status);
 
+/* Builtin */
+int		command_menu(t_data *minishell, char **args);
+
 /* Exec */
 int		execute_command(t_data *minishell);
 int		loop_tree(t_data *minishell, t_ast *ast);
+void	execute_child_command(char *command, char **args, t_data *minishell);
+int		execute_parent_command(pid_t pid);
+int		execution_route(t_data *minishell, char **args);
+char	*find_command(t_data *minishell, char *cmd, int *result);
+char	**split_path(t_data *minishell);
 
 /* Ev */
 t_lev	*findlev(t_lev *lev, const char *key);
