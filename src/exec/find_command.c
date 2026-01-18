@@ -6,11 +6,40 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 11:08:27 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/16 11:32:10 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:52:10 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+/* Checks whether a command given by a path is executable.*/
+char	*command_check(char *cmd, int *result)
+{
+	struct stat	info;
+	int			errno;
+
+	if (!cmd || !cmd[0])
+		return (NULL);
+	if (cmd[0] == '/' || cmd[0] == '.')
+	{
+		errno = 0;
+		if (access(cmd, X_OK) != 0 || stat(cmd, &info) != 0)
+		{
+			if (errno == EACCES)
+				*result = -1;
+			else if (errno == ENOENT)
+				*result = -2;
+			return (NULL);
+		}
+		if (S_ISDIR(info.st_mode))
+		{
+			*result = -3;
+			return (NULL);
+		}
+		return (ft_strdup(cmd));
+	}
+	return (NULL);
+}
 
 /* Retrieves and splits the PATH environment variable. */
 char	**split_path(t_data *minishell)
@@ -35,7 +64,7 @@ char	*find_command(t_data *minishell, char *cmd, int *result)
 	char	*full_path;
 	int		i;
 
-	full_path = verify_command(cmd, result); //missing
+	full_path = command_check(cmd, result);
 	if (full_path)
 		return (full_path);
 	if (*result != 0)

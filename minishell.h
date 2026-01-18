@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/16 11:26:37 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:53:12 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <string.h>
+# include <errno.h>
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <readline/readline.h>
@@ -147,6 +148,7 @@ int		execute_parent_command(pid_t pid);
 int		execution_route(t_data *minishell, char **args);
 char	*find_command(t_data *minishell, char *cmd, int *result);
 char	**split_path(t_data *minishell);
+char	*command_check(char *cmd, int *result);
 
 /* Ev */
 t_lev	*findlev(t_lev *lev, const char *key);

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:16:05 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/16 11:08:00 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:54:02 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	execution_route(t_data *minishell, char **args)
 	char	*command;
 
 	result = 0;
-	command = find_command(minishell, args[0], &result); //missing
+	command = find_command(minishell, args[0], &result);
 	if (!command)
 		return (print_command_error(result, args[0]));
 	pid = fork();
