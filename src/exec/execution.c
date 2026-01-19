@@ -6,11 +6,37 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/18 18:03:38 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:21:40 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+/* Execute AND "function" */
+static int	execute_and(t_data *minishell, t_ast *ast)
+{
+	int	result;
+
+	result = 0;
+	if (ast->left)
+		result = loop_tree(minishell, ast->left);
+	if (result == 0 && ast->right)
+		result = loop_tree(minishell, ast->right);
+	return (result);
+}
+
+/* Execute OR "function" */
+static int	execute_or(t_data *minishell, t_ast *ast)
+{
+	int	result;
+
+	result = 0;
+	if (ast->left)
+		result = loop_tree(minishell, ast->left);
+	if (result == 0 && ast->right)
+		result = loop_tree(minishell, ast->right);
+	return (result);
+}
 
 /* Execute the command represented by the AST */
 int	execute_command(t_data *minishell)
@@ -26,21 +52,21 @@ int	execute_command(t_data *minishell)
 	return (result);
 }
 
-int	operators_command(t_data *minishell, t_ast ast) // continue there
+int	operators_command(t_data *minishell, t_ast *ast)
 {
 	int	result;
 
 	result = 0;
 	if (ast->id == AND)
-		result = exec_and(minishell, ast);
+		result = execute_and(minishell, ast);
 	else if (ast->id == OR)
-		result = exec_or(minishell, ast);
+		result = execute_or(minishell, ast);
 	else if (ast->id == PIPE)
-		result = exec_pipe(minishell, ast);
+		result = execute_pipe(minishell, ast); //missing
 	else if (ast->id >= REDIR_IN && ast->id <= APPEND)
-		result = exec_redir(minishell, ast, ast->id);
+		result = execute_redir(minishell, ast, ast->id); //missing
 	else if (ast->id == SUBSHELL)
-		result = exec_submodule(minishell, ast->left);
+		result = execute_submodule(minishell, ast->left); //missing
 	return (result);
 }
 
