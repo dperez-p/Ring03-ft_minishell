@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/21 10:05:35 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/23 19:27:23 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int		execution_route(t_data *minishell, char **args);
 char	*find_command(t_data *minishell, char *cmd, int *result);
 char	**split_path(t_data *minishell);
 char	*command_check(char *cmd, int *result);
-int		execution_pipe(t_data *minishell, t_ast *ast);
+int		execute_pipe(t_data *minishell, t_ast *ast);
 
 /* Ev */
 t_lev	*findlev(t_lev *lev, const char *key);

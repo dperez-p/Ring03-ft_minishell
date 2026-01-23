@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 09:26:57 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/21 10:05:47 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/23 19:27:25 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	pipe_children(t_data *minishell, t_ast *ast, int fd[2], int index)
 	exit(status);
 }
 
+/* Wait for a child process to finish and normalize its exit status */
 static void	wait_status(pid_t pid, int	*status)
 {
 	waitpid(pid, status, 0);
@@ -40,7 +41,7 @@ static void	wait_status(pid_t pid, int	*status)
 
 /* Create a pipe and two children: one writes (left),
  the other reads (right) and returns the status. */
-int	execution_pipe(t_data *minishell, t_ast *ast)
+int	execute_pipe(t_data *minishell, t_ast *ast)
 {
 	int		fd[2];
 	int		status[2];
@@ -59,8 +60,8 @@ int	execution_pipe(t_data *minishell, t_ast *ast)
 	if (children_pid[1] == 0)
 		pipe_children(minishell, ast->right, fd, STDIN_FILENO);
 	close_fd(fd);
-	wait_status(children_pid[0], &status[0]);//missing
-	wait_status(children_pid[1], &status[1]);//missing
+	wait_status(children_pid[0], &status[0]);
+	wait_status(children_pid[1], &status[1]);
 	if (status[0] == SIGINT + 128)
 		return (status[0]);
 	return (status[1]);

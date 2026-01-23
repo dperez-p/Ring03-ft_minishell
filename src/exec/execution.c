@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/19 13:21:40 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/23 19:31:18 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	operators_command(t_data *minishell, t_ast *ast)
 	else if (ast->id == OR)
 		result = execute_or(minishell, ast);
 	else if (ast->id == PIPE)
-		result = execute_pipe(minishell, ast); //missing
+		result = execute_pipe(minishell, ast);
 	else if (ast->id >= REDIR_IN && ast->id <= APPEND)
 		result = execute_redir(minishell, ast, ast->id); //missing
 	else if (ast->id == SUBSHELL)

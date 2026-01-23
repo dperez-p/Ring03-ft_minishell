@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:59:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:30:44 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/23 19:36:39 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	*handle_dollar(t_data *minishell, char *str, int *i)
 	return (result);
 }
 
+/* Expand the user’s tokens (resolving variables, tildes, and wildcards) into a
+ new argument array ready to be executed, freeing the original memory */
 char	**expansor(t_data *minishell, char **tokens)
 {
 	char	**args;

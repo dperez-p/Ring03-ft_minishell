@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:16:05 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/18 17:54:02 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/23 19:25:52 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	execution_route(t_data *minishell, char **args)
 	pid = fork();
 	setup_signal(pid);
 	if (pid == 0)
-		exec_child_command(command, args, minishell->envp);
+		exec_child_command(command, args, minishell);
 	else if (pid > 0)
 		result = execute_parent_command(pid);
 	else if (pid == -1)
