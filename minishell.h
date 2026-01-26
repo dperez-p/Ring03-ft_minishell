@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/23 19:27:23 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:54:33 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <errno.h>
 # include <termios.h>
 # include <sys/ioctl.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -150,6 +151,8 @@ char	*find_command(t_data *minishell, char *cmd, int *result);
 char	**split_path(t_data *minishell);
 char	*command_check(char *cmd, int *result);
 int		execute_pipe(t_data *minishell, t_ast *ast);
+int		execute_redir(t_data *minishell, t_ast *ast, int id);
+int		execute_submodule(t_data *minishell, t_ast *ast);
 
 /* Ev */
 t_lev	*findlev(t_lev *lev, const char *key);
@@ -196,9 +199,12 @@ void	free_ast(t_ast *node);
 
 /* Signals */
 void	handle_heredoc(int signum);
-void	handle_sigint(void);
+void	heredoc_signal(void);
+void	handle_sigint(int sig);
 void	setup_signal(int pid);
 void	handle_sigpipe(int signum);
+void	handle_ctrl_c(int sig);
+void	interactive_signal(void);
 
 /* Tokenizer*/
 t_token	*create_token(char *value, int id);

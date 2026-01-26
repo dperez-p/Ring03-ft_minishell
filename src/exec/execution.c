@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/23 19:31:18 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:38:27 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	execute_command(t_data *minishell)
 	return (result);
 }
 
+/* Act as a command dispatcher: identify the operator type
+ (AND, OR, PIPE, REDIR, or SUBSHELL) and call its execution function */
 int	operators_command(t_data *minishell, t_ast *ast)
 {
 	int	result;
@@ -64,9 +66,9 @@ int	operators_command(t_data *minishell, t_ast *ast)
 	else if (ast->id == PIPE)
 		result = execute_pipe(minishell, ast);
 	else if (ast->id >= REDIR_IN && ast->id <= APPEND)
-		result = execute_redir(minishell, ast, ast->id); //missing
+		result = execute_redir(minishell, ast, ast->id);
 	else if (ast->id == SUBSHELL)
-		result = execute_submodule(minishell, ast->left); //missing
+		result = execute_submodule(minishell, ast->left);
 	return (result);
 }
 
