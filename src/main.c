@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/26 10:42:41 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/27 11:50:58 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	update_exit_status(t_data *minishell, int status)
 	g_signal = 0;
 }
 
-static void iteration_init(t_data *minishell)
+/* Prepares the environment for a new iteration: enables signals and clears
+previous data  frees the previous input and removes temporary heredoc files */
+static void	iteration_init(t_data *minishell)
 {
-	interactive_signal();//missing
+	interactive_signal();
 	if (minishell->input)
 		free(minishell->input);
 	remove_heredoc_files(minishell);
@@ -50,7 +52,7 @@ static void	run(t_data *minishell)
 
 	while (1)
 	{
-		iteration_init(minishell); //missing
+		iteration_init(minishell);
 		minishell->input = get_input(minishell);
 		if (minishell->input != NULL && !check_empty_input(minishell->input))
 		{

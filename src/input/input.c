@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:02:33 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/30 19:15:44 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/27 11:11:47 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ char	*get_input(t_data *minishell)
 		update_exit_status(minishell, SIGINT + 130);
 	if (!input)
 	{
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 1);
 		finish(minishell);
 	}
 	if (*input)
 		add_history(input);
-	status = check_syntax(input);
+	status = check_input_syntax(input);
 	if (status != 0)
 	{
 		update_exit_status(minishell, status);

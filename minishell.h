@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/26 10:54:33 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:06:22 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ t_data	*init_minishell(char **ev);
 /* Input */
 int		check_syntax(t_data *minishell, t_token *token);
 char	*get_input(t_data *minishell);
+int		check_input_syntax(char *str);
+int		check_empty_input(char *str);
 
 /* Parser */
 void	remove_heredoc_files(t_data *minishell);
@@ -212,7 +214,8 @@ void	add_token(t_token **tokens, t_token *new_token);
 void	free_tokens(t_token **tokens);
 int		token_len(const char *token, int id);
 char	*extract_token(const char *input, int id);
-t_token	**tokenize_input(const char *input);
+t_token	**tokenize_input(char *input);
+int		token_length(const char *str, int id);
 
 /* utils */
 void	handle_error(char *error);

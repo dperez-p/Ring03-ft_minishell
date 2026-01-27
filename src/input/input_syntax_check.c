@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:37:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 19:32:47 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/27 11:07:37 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,41 @@ static int	operators_rule(t_token *token)
 		return (print_error(SYNTAX, 2, NULL, token->prev->value));
 	if (token->next->id >= REDIR_IN && token->next->id <= APPEND)
 		return (print_error(SYNTAX, 2, NULL, token->next->value));
+	return (0);
+}
+
+/* Validates that every redirection is mandatory followed by an argument 
+ returns 0 if valid, or a syntax error if the destination is missing */
+static int	redir_rule(t_token *token)
+{
+	if (!token->next)
+		return (print_error(SYNTAX, 2, NULL, token->value));
+	if (token->next->id != ARG)
+		return (print_error(SYNTAX, 2, NULL, token->next->value));
+	return (0);
+}
+
+/* Validates the position of parentheses relative to their neighboring tokens
+ returns 0 if the syntax is correct, or an error if the sequence is invalid */
+static int	paren_rule(t_token *token)
+{
+	if (token->id == PAREN_OPEN)
+	{
+		if (token->prev && token->prev->id >= PAREN_CLOSE)
+			return (print_error(SYNTAX, 2, NULL, token->prev->value));
+		if (!token->next || (token->next->id != ARG
+				&& token->next->id != PAREN_OPEN))
+			return (print_error(SYNTAX, 2, NULL, token->next->value));
+	}
+	if (token->id == PAREN_CLOSE)
+	{
+		if (!token->prev)
+			return (print_error(SYNTAX, 2, NULL, token->value));
+		if (token->prev->id != ARG && token->prev->id != PAREN_CLOSE)
+			return (print_error(SYNTAX, 2, NULL, token->prev->value));
+		if (token->next && token->next->id == ARG)
+			return (print_error(SYNTAX, 2, NULL, token->prev->value));
+	}
 	return (0);
 }
 

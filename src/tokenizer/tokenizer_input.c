@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:20:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:25:51 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:05:54 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,39 @@ char	*extract_token(const char *input, int id)
 	return (token);
 }
 
+/*Calculates the length of the current token based on its type and quoting rules
+ returns a fixed size for operators or a dynamic size for arguments (ARG) */
+int	token_length(const char *str, int id)
+{
+	int		len;
+	char	quote;
+
+	len = 0;
+	quote = '\0';
+	if (id == PIPE || id == PAREN_OPEN || id == PAREN_CLOSE
+		|| id == REDIR_IN || id == REDIR_OUT)
+		return (1);
+	if (id == AND || id == OR || id == APPEND || id == HEREDOC)
+		return (2);
+	while (str[len] && !ft_is_space(str[len]) && get_id(&str[len] == ARG))
+	{
+		if (str[len] == '\'' || str[len] == '\"')
+		{
+			quote = str[len];
+			len++;
+			while (str[len] && str[len] != quote)
+				len++;
+			if (str[len] == quote)
+				len++;
+		}
+		else
+			len++;
+	}
+	return (len);
+}
+
 /* Tokenizes the input string into a linked list of tokens*/
-t_token	**tokenize_input(const char *input)
+t_token	**tokenize_input(char *input)
 {
 	int		id;
 	char	*current_token;

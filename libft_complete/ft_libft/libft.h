@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:34:03 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 19:41:55 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/27 11:45:34 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,7 @@ void	*allocate_mem(size_t nmemb, size_t size);
 void	collect_mem(void *content);
 
 t_list	**get_memory_ptr(void);
+
+int		ft_is_space(int c);
 
 #endif
