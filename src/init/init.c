@@ -6,27 +6,27 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:19:42 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 18:22:23 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:24:53 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/* Initializes the main structure, sets up the prompt and environment, 
+   and backs up the standard file descriptors (STDIN/STDOUT) */
 t_data	*init_minishell(char **ev)
 {
 	t_data	*minishell;
 
-	minishell = malloc(sizeof(t_data));
-	if (!minishell)
-		handle_error(MALLOC);
+	minishell = allocate_mem(1, sizeof(t_data));
 	minishell->prompt = YELLOW "minishell$ " RESET;
 	minishell->ev = ev;
-	minishell->status = 0;
-	minishell->ev_num = count_env_variables(ev);
-	minishell->lev = init_env_list(ev);
-	minishell->input = NULL;
+	minishell->lev = init_env_list(minishell);
+	minishell->fd_bk[0] = dup(STDIN_FILENO);
+	minishell->fd_bk[1] = dup(STDOUT_FILENO);
+	if (minishell->fd_bk[0] == -1 || minishell->fd_bk[1] == -1)
+		handle_error(DUP_ERR);
 	minishell->heredoc_num = 0;
-	minishell->token = NULL;
-	minishell->ast = NULL;
+	minishell->status = 0;
 	return (minishell);
 }

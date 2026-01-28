@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:37:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 11:07:37 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:14:04 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	operators_rule(t_token *token)
 		return (print_error(SYNTAX, 2, NULL, token->value));
 	if (token->prev->id != ARG && token->prev->id != PAREN_CLOSE)
 		return (print_error(SYNTAX, 2, NULL, token->prev->value));
-	if (token->next->id >= REDIR_IN && token->next->id <= APPEND)
+	if (token->next->id != ARG && token->next->id != PAREN_OPEN
+		&& !(token->next->id >= REDIR_IN && token->next->id <= APPEND))
 		return (print_error(SYNTAX, 2, NULL, token->next->value));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:38:14 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 18:59:26 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:45:17 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_lev	**init_env_list(t_data *minishell)
 	t_lev	*new_node;
 
 	i = 0;
-	minishell->ev_num = ft_evlen(minishell->ev);
+	minishell->ev_num = ft_array_len(minishell->ev);
 	lev = malloc(sizeof(t_lev *));
 	if (!lev)
 		handle_error(MALLOC);
@@ -117,6 +117,7 @@ t_lev	**init_env_list(t_data *minishell)
 	{
 		arr_ev = separate_ev(minishell->ev[i]);
 		new_node = create_env_node(arr_ev);
+		ft_free_matrix(arr_ev);
 		append_env_node(lev, new_node);
 		i++;
 	}

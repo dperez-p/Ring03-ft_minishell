@@ -6,12 +6,14 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:02:33 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 11:11:47 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:53:34 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/* Reads the user input, manages signals and history, and verifies 
+   that the syntax is valid before returning the read line. */
 char	*get_input(t_data *minishell)
 {
 	char	*input;
@@ -31,7 +33,6 @@ char	*get_input(t_data *minishell)
 	if (status != 0)
 	{
 		update_exit_status(minishell, status);
-		free(input);
 		return (NULL);
 	}
 	return (input);

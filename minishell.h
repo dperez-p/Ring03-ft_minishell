@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 12:06:22 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:10:56 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,12 +154,12 @@ int		execute_pipe(t_data *minishell, t_ast *ast);
 int		execute_redir(t_data *minishell, t_ast *ast, int id);
 int		execute_submodule(t_data *minishell, t_ast *ast);
 
-/* Ev */
-t_lev	*findlev(t_lev *lev, const char *key);
+/* Environtment */
 t_lev	*create_env_node(char **arr_ev);
 void	append_env_node(t_lev **lev, t_lev *new_node);
 char	**separate_ev(char *ev);
 t_lev	**init_env_list(t_data *minishell);
+t_lev	*findlev(t_lev *lev, const char *key);
 char	**convert_lev_to_array(t_data *minishell);
 
 /* Expansion*/
@@ -212,7 +212,6 @@ void	interactive_signal(void);
 t_token	*create_token(char *value, int id);
 void	add_token(t_token **tokens, t_token *new_token);
 void	free_tokens(t_token **tokens);
-int		token_len(const char *token, int id);
 char	*extract_token(const char *input, int id);
 t_token	**tokenize_input(char *input);
 int		token_length(const char *str, int id);

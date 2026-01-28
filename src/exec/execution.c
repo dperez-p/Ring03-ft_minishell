@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/26 10:38:27 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:15:45 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	loop_tree(t_data *minishell, t_ast *ast)
 		return (0);
 	if (ast->args == NULL)
 	{
-		ast->args = expansor(minishell, ast->args);
+		ast->args = expansor(minishell, ast->args); //sigue por aqui
 		while (ast->args[i] && ast->args[i][0] == '\0')
 			i++;
 		if (!ast->args[i])

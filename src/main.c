@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 11:50:58 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:26:07 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	finish(t_data *minishell)
 		exit_status = 130;
 	else
 		exit_status = minishell->status;
-	clean_minishell(minishell);
-	free(minishell);
+	close_fd(minishell->fd_bk);
+	clear_mem();
 	exit(exit_status);
 }
 
@@ -48,7 +48,7 @@ static void	iteration_init(t_data *minishell)
 /* Function to run the main loop of the shell */
 static void	run(t_data *minishell)
 {
-	t_root	*root;
+	t_ast	*root;
 
 	while (1)
 	{

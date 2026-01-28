@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 20:33:55 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/12/31 20:38:47 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:07:28 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_token	*create_token(char *value, int id)
 		handle_error(MALLOC);
 	new_token->id = id;
 	new_token->value = value;
+	if (!new_token->value)
+		handle_error(MALLOC);
 	new_token->prev = NULL;
 	new_token->next = NULL;
 	return (new_token);

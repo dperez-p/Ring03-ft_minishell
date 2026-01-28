@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:48:11 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/16 10:59:52 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:17:53 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	command_menu(t_data *minishell, char **args)
 	if (!ft_strncmp(args[0], "env", 3) && ft_strlen(args[0]) == 3)
 		return (env(minishell->lev, args));
 	if (!ft_strncmp(args[0], "exit", 4) && ft_strlen(args[0]) == 4)
-		return (exec_exit(minishell, args));
+		return (exec_exit(minishell, args)); //missing all functions there
 	return (-1);
 }

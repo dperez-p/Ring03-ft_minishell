@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:20:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 12:05:54 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:11:04 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,6 @@ static int	get_id(const char *token)
 		return (ARG);
 }
 
-/* Returns the length of the token based on its type */
-int	token_len(const char *token, int id)
-{
-	int		len;
-	char	quote_char;
-
-	len = 0;
-	quote_char = 0;
-	if (id == PIPE || id == PAREN_OPEN || id == PAREN_CLOSE
-		|| id == REDIR_IN || id == REDIR_OUT)
-		return (1);
-	if (id == HEREDOC || id == APPEND || id == AND || id == OR)
-		return (2);
-	while (token[len] && !is_space(token[len]) && (get_id(&token[len]) == ARG))
-	{
-		if (is_quote_char(token[len]))
-		{
-			quote_char = token[len];
-			len++;
-			while (token[len] && token[len] != quote_char)
-				len++;
-			if (token[len] == quote_char)
-				len++;
-		}
-		else
-			len++;
-	}
-	return (len);
-}
-
 /* Extracts the token string from the input based on its type */
 char	*extract_token(const char *input, int id)
 {
@@ -74,7 +44,7 @@ char	*extract_token(const char *input, int id)
 	char	*token;
 	int		i;
 
-	len = token_len(input, id);
+	len = token_length(input, id);
 	token = malloc((len + 1) * sizeof(char));
 	if (!token)
 		handle_error(MALLOC);
@@ -97,8 +67,8 @@ int	token_length(const char *str, int id)
 
 	len = 0;
 	quote = '\0';
-	if (id == PIPE || id == PAREN_OPEN || id == PAREN_CLOSE
-		|| id == REDIR_IN || id == REDIR_OUT)
+	if (id == PIPE || id == PAREN_OPEN || id == PAREN_CLOSE || id == REDIR_IN
+		|| id == REDIR_OUT)
 		return (1);
 	if (id == AND || id == OR || id == APPEND || id == HEREDOC)
 		return (2);
@@ -129,19 +99,18 @@ t_token	**tokenize_input(char *input)
 
 	tokens = malloc(sizeof(t_token *));
 	if (!tokens)
-	{
 		handle_error(MALLOC);
-	}
 	*tokens = NULL;
 	while (*input)
 	{
-		while (*input > 9 && *input < 13 || *input == 32)
+		while (*input && ft_is_space(*input))
 			input++;
 		if (*input)
 		{
 			id = get_id(input);
 			current_token = extract_token(input, id);
 			new_token = create_token(current_token, id);
+			deallocate_mem(current_token);
 			add_token(tokens, new_token);
 			input += token_length(current_token, id);
 		}
