@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 13:08:05 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 13:28:24 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/01/29 11:37:09 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ char	**split_tokens(char *expanded)
 	int		i;
 	int		j;
 
-	split = malloc(sizeof(char *) * 1);
-	if (!split)
-		handle_error(MALLOC);
+	split = allocate_mem(sizeof(char *), 1);
+	j = 0;
 	i = 0;
 	quote = '\0';
 	while (expanded[i])
