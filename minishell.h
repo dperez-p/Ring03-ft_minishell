@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/29 11:52:52 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/01 13:23:04 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <limits.h>
 
 /*GLOBAL*/
 extern volatile int	g_signal;
@@ -66,6 +67,8 @@ extern volatile int	g_signal;
 # define RESET   "\001\033[0m\002"
 
 /******************************************* STRUCTS ********************/
+
+typedef long long	t_ll;
 
 /* Token IDs */
 typedef enum s_id
@@ -140,6 +143,19 @@ void	update_exit_status(t_data *minishell, int status);
 
 /* Builtin */
 int		command_menu(t_data *minishell, char **args);
+void	update_env_var(t_lev **lev, char *key, char *value);
+int		cd(t_lev **lev, char **args);
+int		echo(char **args);
+int		env(t_lev **lev, char **args);
+int		exec_exit(t_data *minishell, char **args);
+void	print_export(t_lev **lev);
+void	parse_assignment(char *arg, char **key, char **value, int *append);
+int		export(t_data *minishell, char **args);
+void	export_variable(t_lev **lev, char *key, char *value, int append);
+int		pwd(t_data *minishell);
+int		unset(t_data *minishell, char **args);
+t_ll	ft_atoll(const char *str);
+int		is_valid_identifier(const char *str);
 
 /* Exec */
 int		execute_command(t_data *minishell);
@@ -174,6 +190,7 @@ char	**expansor(t_data *minishell, char **tokens);
 char	*get_env_value(t_list *lev, const char *var_name);
 char	**realloc_matches_array(char **matches, const char *new_match,
 			int count);
+char	*get_key_value(t_lev *lev, const char *key);
 
 /* Init */
 t_data	*init_minishell(char **ev);

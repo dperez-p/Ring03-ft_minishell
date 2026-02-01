@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 13:26:07 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/01 13:10:26 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	run(t_data *minishell)
 			minishell->token = tokenize_input(minishell->input);
 			if (check_syntax(minishell, *minishell->token) == 0)
 			{
-				root = build_tree(minishell, minishell->token);
+				root = build_tree(minishell, *minishell->token);
 				if (!root)
 					handle_error(MALLOC);
 				minishell->ast = &root;

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:48:11 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 13:17:53 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/01 13:17:06 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ int	command_menu(t_data *minishell, char **args)
 	if (!ft_strncmp(args[0], "env", 3) && ft_strlen(args[0]) == 3)
 		return (env(minishell->lev, args));
 	if (!ft_strncmp(args[0], "exit", 4) && ft_strlen(args[0]) == 4)
-		return (exec_exit(minishell, args)); //missing all functions there
+		return (exec_exit(minishell, args));
 	return (-1);
+}
+
+/* Checks if the string is a valid identifier */
+int	is_valid_identifier(const char *str)
+{
+	int	i;
+
+	if (!str || (!ft_isalpha(str[0]) && str[0] != '_'))
+		return (0);
+	i = 1;
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
 }

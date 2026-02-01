@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 09:54:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:46:02 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/01 13:23:45 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,15 @@ char	**realloc_matches_array(char **matches, const char *new_match,
 	new_array[i + 1] = NULL;
 	free(matches);
 	return (new_array);
+}
+
+/* Searches for a key in the environment list */
+char	*get_key_value(t_lev *lev, const char *key)
+{
+	t_lev	*env_var;
+
+	env_var = findlev(lev, key);
+	if (!env_var || !env_var->value)
+		return (NULL);
+	return (env_var->value);
 }
