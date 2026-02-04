@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:13:04 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/10/21 17:33:04 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 13:26:45 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # endif 
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *str);
 bool	ft_get_strchr(const char *s, int c);
 void	*ft_calloc(size_t num, size_t size);
 

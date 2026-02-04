@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 10:48:11 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/01 13:17:06 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:31:48 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ int	is_valid_identifier(const char *str)
 		i++;
 	}
 	return (1);
+}
+
+/* Iterates through the argument array to find the first string starting with 
+   a '-' followed by a letter, returning its index or 0 if not found */
+int	has_flag(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (args[i][0] == '-' && ft_isalpha(args[i][1]))
+			return (i);
+		i++;
+	}
+	return (0);
 }

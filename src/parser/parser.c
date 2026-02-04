@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:29:08 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 13:00:49 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:55:24 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ t_ast	*build_tree(t_data *minishell, t_token *token)
 	operator = search_pipeline(token);
 	if (operator)
 		return (parse_operator(minishell, token, operator));
+	return (parse_token(token));
 }

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/01 13:23:04 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:58:16 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void	parse_assignment(char *arg, char **key, char **value, int *append);
 int		export(t_data *minishell, char **args);
 void	export_variable(t_lev **lev, char *key, char *value, int append);
 int		pwd(t_data *minishell);
-int		unset(t_data *minishell, char **args);
+int		unset(t_data *minishell, char **arg);
 t_ll	ft_atoll(const char *str);
 int		is_valid_identifier(const char *str);
 
@@ -177,6 +177,7 @@ char	**separate_ev(char *ev);
 t_lev	**init_env_list(t_data *minishell);
 t_lev	*findlev(t_lev *lev, const char *key);
 char	**convert_lev_to_array(t_data *minishell);
+int		remove_env_node(t_lev **lev, char *key);
 
 /* Expansion*/
 char	**split_tokens(char *expanded);
@@ -187,10 +188,11 @@ void	free_both(char *a, char *b);
 char	*expand_wildcards(char *token);
 char	*handle_dollar(t_data *minishell, char *str, int *i);
 char	**expansor(t_data *minishell, char **tokens);
-char	*get_env_value(t_list *lev, const char *var_name);
+char	*get_env_value(t_lev *lev, const char *var_name);
 char	**realloc_matches_array(char **matches, const char *new_match,
 			int count);
 char	*get_key_value(t_lev *lev, const char *key);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 /* Init */
 t_data	*init_minishell(char **ev);
@@ -218,12 +220,12 @@ void	free_ast(t_ast *node);
 
 /* Signals */
 void	handle_heredoc(int signum);
-void	heredoc_signal(void);
+void	heredoc_signals(void);
 void	handle_sigint(int sig);
-void	setup_signal(int pid);
+void	setup_signals(int pid);
 void	handle_sigpipe(int signum);
 void	handle_ctrl_c(int sig);
-void	interactive_signal(void);
+void	interactive_signals(void);
 
 /* Tokenizer*/
 t_token	*create_token(char *value, int id);

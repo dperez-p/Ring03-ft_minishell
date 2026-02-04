@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 09:26:57 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/23 19:27:25 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:54:31 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	execute_pipe(t_data *minishell, t_ast *ast)
 	children_pid[0] = fork();
 	if (children_pid[0] == -1)
 		handle_error(FORK);
-	setup_signal(children_pid[0]);
+	setup_signals(children_pid[0]);
 	if (children_pid[0] == 0)
 		pipe_children(minishell, ast->left, fd, STDOUT_FILENO);
 	children_pid[1] = fork();
-	setup_signal(children_pid[1]);
+	setup_signals(children_pid[1]);
 	if (children_pid[1] == 0)
 		pipe_children(minishell, ast->right, fd, STDIN_FILENO);
 	close_fd(fd);

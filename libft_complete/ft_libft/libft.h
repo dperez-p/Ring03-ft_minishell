@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:34:03 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 11:45:34 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:49:03 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ char	**ft_split(char const *s, char c);
 
 char	*ft_itoa(int n);
 
-void	ft_putchar_fd(char c, int fd);
+int		ft_putchar_fd(char c, int fd);
 
 void	ft_putnbr_fd(int n, int fd);
 
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
 
 void	ft_putendl_fd(char *s, int fd);
 
@@ -127,5 +127,13 @@ void	collect_mem(void *content);
 t_list	**get_memory_ptr(void);
 
 int		ft_is_space(int c);
+
+int		ft_printf_fd(int fd, const char *str, ...);
+
+int		ft_verify(char spec, va_list args, int fd);
+
+int		ft_putpointer_fd(unsigned long p, int fd);
+
+int		ft_putbase_fd(long long n, char *base, int div, int fd);
 
 #endif

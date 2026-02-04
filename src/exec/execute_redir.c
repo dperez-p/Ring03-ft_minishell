@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 19:29:32 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/26 10:26:20 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:47:00 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ int	execute_redir(t_data *minishell, t_ast *ast, int id)
 	int	standard;
 	int	status;
 
-	ast->right->args = expansor(minishell, ast->right->right);
+	ast->right->args = expansor(minishell, ast->right->args);
 	if (check_file(ast, id))
 		return (1);
 	file_fd = get_filedescriptor(ast, id);
 	if (file_fd < 0)
-		return (print_error(INVALID_FILE, 1, "open", ast->right->args));
+		return (print_error(INVALID_FILE, 1, "open", ast->right->args[0]));
 	standard = get_standard(id);
 	if (dup2(file_fd, standard))
 	{

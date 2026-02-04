@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 20:16:06 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 13:30:24 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:57:39 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	restore_fd(int *fd)
 {
 	fd[0] = dup(STDIN_FILENO);
 	fd[1] = dup(STDOUT_FILENO);
-	if (fd[0] == -1 || fd(1) == -1)
+	if (fd[0] == -1 || fd[1] == -1)
 		handle_error(DUP_ERR);
 }
 

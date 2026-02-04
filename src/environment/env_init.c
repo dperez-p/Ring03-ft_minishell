@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:38:14 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 13:45:17 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:38:58 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**separate_ev(char *ev)
 	}
 	else
 		equal_sign = NULL;
-	arr_ev = allocate_mem(3 * sizeof(char *));
+	arr_ev = allocate_mem(3, sizeof(char *));
 	arr_ev[0] = key;
 	arr_ev[1] = equal_sign;
 	arr_ev[2] = NULL;

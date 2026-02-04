@@ -6,7 +6,7 @@
 #    By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/22 10:02:35 by dperez-p          #+#    #+#              #
-#    Updated: 2026/01/27 11:46:38 by dperez-p         ###   ########.fr        #
+#    Updated: 2026/02/04 13:23:52 by dperez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,9 @@ FT_LIBFT = ./ft_libft/ft_isalnum.c ./ft_libft/ft_isalpha.c ./ft_libft/ft_isascii
 		./ft_libft/ft_putstr_fd.c ./ft_libft/ft_putendl_fd.c ./ft_libft/ft_striteri.c ./ft_libft/ft_strmapi.c \
 		./ft_libft/ft_lstnew_bonus.c ./ft_libft/ft_lstadd_front_bonus.c ./ft_libft/ft_lstsize_bonus.c \
 		./ft_libft/ft_lstlast_bonus.c ./ft_libft/ft_lstadd_back_bonus.c ./ft_libft/ft_lstdelone_bonus.c \
-		./ft_libft/ft_lstclear_bonus.c ./ft_libft/ft_lstiter_bonus.c ./ft_libft/ft_lstmap_bonus.c ./ft_libft/ft_free_matrix.c
-		./ft_libft/ft_array_len.c ./ft_libft/ft_strcasecmp.c ./ft_libft/ft_memory_collect.c ./ft_libft/ft_is_space.c
+		./ft_libft/ft_lstclear_bonus.c ./ft_libft/ft_lstiter_bonus.c ./ft_libft/ft_lstmap_bonus.c ./ft_libft/ft_free_matrix.c \
+		./ft_libft/ft_array_len.c ./ft_libft/ft_strcasecmp.c ./ft_libft/ft_memory_collect.c ./ft_libft/ft_is_space.c \
+		./ft_libft/ft_print_fd.c
 
 FT_PRINTF = ./ft_printf/ft_printf.c ./ft_printf/ft_putchar.c ./ft_printf/ft_putstr.c ./ft_printf/ft_putnbr.c \
 		./ft_printf/ft_print_unsigned.c ./ft_printf/ft_print_hex.c ./ft_printf/ft_print_ptr.c
@@ -57,6 +58,6 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-re: @fclean all
+re: fclean all
 
 .PHONY: all bonus clean fclean re

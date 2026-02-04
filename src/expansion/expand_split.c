@@ -6,40 +6,11 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 13:08:05 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/29 11:37:09 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:12:28 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-/* Helper function to update the current quote state */
-char	**split_tokens(char *expanded)
-{
-	char	**split;
-	char	quote;
-	int		i;
-	int		j;
-
-	split = allocate_mem(sizeof(char *), 1);
-	j = 0;
-	i = 0;
-	quote = '\0';
-	while (expanded[i])
-	{
-		quote = quote_update(expanded[i], quote);
-		if (expanded[i] == ' ' && quote == '\0')
-		{
-			append_split_token(&split, expanded, j, i);
-			while (expanded[i] == ' ')
-				i++;
-			j = i;
-			continue ;
-		}
-		i++;
-	}
-	append_split_token(&split, expanded, j, i);
-	return (split);
-}
 
 /* Function to remove quotes from a string */
 char	*remove_quotes(char *str)
@@ -93,4 +64,33 @@ static int	quote_update(char curr, char quote)
 	else if (curr == quote)
 		return (0);
 	return (quote);
+}
+
+/* Helper function to update the current quote state */
+char	**split_tokens(char *expanded)
+{
+	char	**split;
+	char	quote;
+	int		i;
+	int		j;
+
+	split = allocate_mem(sizeof(char *), 1);
+	j = 0;
+	i = 0;
+	quote = '\0';
+	while (expanded[i])
+	{
+		quote = quote_update(expanded[i], quote);
+		if (expanded[i] == ' ' && quote == '\0')
+		{
+			append_split_token(&split, expanded, j, i);
+			while (expanded[i] == ' ')
+				i++;
+			j = i;
+			continue ;
+		}
+		i++;
+	}
+	append_split_token(&split, expanded, j, i);
+	return (split);
 }

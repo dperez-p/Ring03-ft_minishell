@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:20:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 14:11:04 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:56:56 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	token_length(const char *str, int id)
 		return (1);
 	if (id == AND || id == OR || id == APPEND || id == HEREDOC)
 		return (2);
-	while (str[len] && !ft_is_space(str[len]) && get_id(&str[len] == ARG))
+	while (str[len] && !ft_is_space(str[len]) && (get_id(&str[len]) == ARG))
 	{
 		if (str[len] == '\'' || str[len] == '\"')
 		{

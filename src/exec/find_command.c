@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 11:08:27 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/18 17:52:10 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:54:42 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char	**split_path(t_data *minishell)
 	path = get_env_value(*minishell->lev, "PATH");
 	if (!path)
 		return (NULL);
-	path = ft_split(path, ':');
-	if (!path)
+	paths = ft_split(path, ':');
+	if (!paths)
 		return (NULL);
-	return (path);
+	return (paths);
 }
 
 /* Resolves the absolute path of a command.
@@ -75,7 +75,7 @@ char	*find_command(t_data *minishell, char *cmd, int *result)
 	while (paths[i])
 	{
 		full_path = concatenate(paths[i], "/", cmd);
-		if (acces(full_path, X_OK) == 0)
+		if (access(full_path, X_OK) == 0)
 			break ;
 		deallocate_mem(full_path);
 		full_path = NULL;

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:32:20 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:27:04 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:52:09 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,25 @@
 
 static char	*expand_line(t_data *minishell, char *line)
 {
-	char	*expanded;
 	int		i;
 	int		start;
+	char	*expanded;
+	char	*temp;
 
-	expanded = ft_strdup("");
-	if (!expanded)
-		handle_error(MALLOC);
 	i = 0;
 	start = 0;
-	while (line[i])
+	expanded = ft_strdup("");
+	while (line [i])
 	{
 		if (line[i] == '$')
-			expanded = unquote_dollar(minishell, line, &i, &start);
-		else
-		{
-			expanded = ft_strjoin(expanded, line[i]);
-			if (!expanded)
-				handle_error(MALLOC);
+			expanded = ft_strjoin_free(expanded,
+					unquote_dollar(minishell, line, &i, &start));
+		if (line[i])
 			i++;
-		}
 	}
-	free(line);
+	temp = ft_substr(line, start, i - start);
+	expanded = ft_strjoin_free(expanded, temp);
+	free (line);
 	return (expanded);
 }
 
@@ -47,18 +44,21 @@ static void	heredoc_write(t_data *minishell, char *delimiter, int fd)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
+		if (!line && g_signal == SIGINT)
 		{
-			ft_putstr_fd("warning: here-document delimited by end-of-file",
-				STDERR_FILENO);
-			ft_putstr_fd("\n", STDERR_FILENO);
-			break ;
+			free(line);
+			return ;
 		}
-		if (ft_strcmp(line, delimiter) == 0)
+		if (!line || ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
 		{
+			if (!line)
+				ft_printf_fd(2,
+					"warning: heredoc delimited by end-of-file (wanted `%s')\n",
+					delimiter);
 			free(line);
 			break ;
 		}
+		line = expand_line(minishell, line);
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);
@@ -113,8 +113,8 @@ void	parse_heredoc(t_data *minishell, t_token *operator)
 		handle_error(MALLOC);
 	fd = open(path, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
-		handle_error(OPEN);
-	heredoc_signaals();
+		handle_error(TEMP_ERR);
+	heredoc_signals();
 	operator->next->value = remove_quotes(operator->next->value);
 	if (!operator->next->value)
 		handle_error(MALLOC);

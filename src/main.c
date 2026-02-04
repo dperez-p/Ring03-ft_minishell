@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/01 13:10:26 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:52:54 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	update_exit_status(t_data *minishell, int status)
 previous data  frees the previous input and removes temporary heredoc files */
 static void	iteration_init(t_data *minishell)
 {
-	interactive_signal();
+	interactive_signals();
 	if (minishell->input)
 		free(minishell->input);
 	remove_heredoc_files(minishell);

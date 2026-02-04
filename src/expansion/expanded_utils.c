@@ -6,14 +6,14 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 09:54:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/01 13:23:45 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:49:41 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /* Expand env value */
-char	*get_env_value(t_list *lev, const char *var_name)
+char	*get_env_value(t_lev *lev, const char *var_name)
 {
 	t_lev	*env_var;
 
@@ -54,4 +54,17 @@ char	*get_key_value(t_lev *lev, const char *key)
 	if (!env_var || !env_var->value)
 		return (NULL);
 	return (env_var->value);
+}
+
+/* Joins two strings and frees both */
+char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*result;
+
+	result = ft_strjoin(s1, s2);
+	if (s1)
+		deallocate_mem(s1);
+	if (s2)
+		deallocate_mem(s2);
+	return (result);
 }

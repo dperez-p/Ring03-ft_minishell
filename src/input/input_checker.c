@@ -6,11 +6,11 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 10:51:47 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/27 11:50:51 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:15:51 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../../minishell.h>
+#include "../../minishell.h"
 
 /* Searches for disallowed characters (\ or ;) outside of quotes in the string
  returns 1 if the string is valid, or 0 if a forbidden character is found */

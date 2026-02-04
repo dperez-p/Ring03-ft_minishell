@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 19:09:44 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 13:35:41 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:41:03 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 /* Function to find an environment variable by key in the linked list */
 t_lev	*findlev(t_lev *lev, const char *key)
 {
+	int	len;
+
+	len = ft_strlen(key);
+	if (!lev)
+		return (0);
 	while (lev)
 	{
-		if (ft_strcmp(lev->key, key) == 0)
+		if (!ft_strncmp(lev->key, key, len + 1))
 			return (lev);
 		lev = lev->next;
 	}
@@ -47,4 +52,25 @@ char	**convert_lev_to_array(t_data *minishell)
 		node = node->next;
 	}
 	return (array);
+}
+
+/* Searches for a node by key, unlinks it from the doubly linked list 
+   by updating neighbor pointers, and frees its allocated memory */
+int	remove_env_node(t_lev **lev, char *key)
+{
+	t_lev	*node;
+
+	node = findlev(*lev, key);
+	if (!node)
+		return (1);
+	if (*lev == node)
+		*lev = node->next;
+	if (node->prev)
+		node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	deallocate_mem(node->key);
+	deallocate_mem(node->value);
+	deallocate_mem(node);
+	return (0);
 }

@@ -1,14 +1,19 @@
 # Name
 NAME	=		minishell
 
-# Compiler and Cflags
+# Compiler and flags
 CC		=		cc
 CFLAGS	=		-Wall -Werror -Wextra
 RM		=		rm -f
+LIBS	=		-lreadline
 
 # Directories
 SRC_DIR	=		src/
 OBJ_DIR	=		obj/
+
+# Libft
+LIBFT_DIR	=	./libft_complete
+LIBFT		=	$(LIBFT_DIR)/libft.a
 
 # SRC files
 SRC		=	main.c \
@@ -62,8 +67,11 @@ OBJ		=		$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 all:	$(NAME)
 
-$(NAME):		$(OBJ)
-				@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME):		$(OBJ) $(LIBFT)
+				@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME)
+
+$(LIBFT):
+				make -C $(LIBFT_DIR)
 
 # Compile object files from source files
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
@@ -71,11 +79,13 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 				@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+				@make -C $(LIBFT_DIR) clean
 				@$(RM) -r $(OBJ_DIR)
 
 fclean:			clean
+				@make -C $(LIBFT_DIR) fclean
 				@$(RM) $(NAME)
 
 re:				fclean all
 
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re libft

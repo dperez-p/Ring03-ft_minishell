@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:12:01 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/10/21 17:34:01 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 13:26:27 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,3 @@ bool	ft_get_strchr(const char *s, int c)
 	return (false);
 }
 
-/* Count the leng of the string */
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}

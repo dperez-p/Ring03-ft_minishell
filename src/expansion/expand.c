@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:59:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/29 11:38:13 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:15:23 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*expand_tilde(t_data *minishell, char *token)
 	expanded = NULL;
 	if (token[0] != '~')
 		return (token);
-	home = get_env_value(minishell->lev, "HOME");
+	home = get_env_value(*minishell->lev, "HOME");
 	if (!home)
 		return (token);
 	if (token[1] == '\0')
@@ -63,7 +63,7 @@ char	*handle_dollar(t_data *minishell, char *str, int *i)
 		return (ft_strdup("$"));
 	var_name = malloc((len + 1) * sizeof(char));
 	ft_strlcpy(var_name, curr, len + 1);
-	var_value = get_env_value(minishell->lev, var_name);
+	var_value = get_env_value(*minishell->lev, var_name);
 	if (!var_name)
 		result = ft_strdup("");
 	else

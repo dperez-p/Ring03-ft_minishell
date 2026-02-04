@@ -6,32 +6,11 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:56:56 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/11 12:59:50 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:13:24 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-/* Function to expand wildcards in a token */
-char	*expand_wildcards(char *token)
-{
-	char	*expanded;
-	char	**matches;
-
-	if (!token || !ft_strchar(token, '*'))
-		return (token);
-	matches = get_matching_filenames(token);
-	if (!ft_array_len(matches))
-	{
-		ft_free_matrix(matches);
-		return (token);
-	}
-	ft_sort_string_array(matches);
-	expanded = array_to_string(matches);
-	ft_free_matrix(matches);
-	free(token);
-	return (expanded);
-}
 
 /* Function to convert an array of strings into
 	a single space-separated string */
@@ -126,4 +105,25 @@ static void	ft_sort_string_array(char **array)
 		}
 		i++;
 	}
+}
+
+/* Function to expand wildcards in a token */
+char	*expand_wildcards(char *token)
+{
+	char	*expanded;
+	char	**matches;
+
+	if (!token || !ft_strchr(token, '*'))
+		return (token);
+	matches = get_matching_filenames(token);
+	if (!ft_array_len(matches))
+	{
+		ft_free_matrix(matches);
+		return (token);
+	}
+	ft_sort_string_array(matches);
+	expanded = array_to_string(matches);
+	ft_free_matrix(matches);
+	free(token);
+	return (expanded);
 }
