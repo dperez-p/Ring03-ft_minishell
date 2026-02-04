@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:59:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:15:23 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:36:28 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	**expansor(t_data *minishell, char **tokens)
 	int		i;
 	int		j;
 
-	args = malloc(1 * sizeof(char *));
+	args = allocate_mem(1, sizeof(char *));
 	i = 0;
 	while (tokens[i])
 	{

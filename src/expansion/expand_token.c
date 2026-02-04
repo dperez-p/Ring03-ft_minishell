@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 18:25:24 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/10 20:07:00 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:32:08 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ char	*expand_token(t_data *minishell, char *token)
 			i++;
 	}
 	tmp = ft_substr(token, start, i - start);
-	expanded = concatenate(expanded, tmp, "");
-	free_both(tmp, token);
+	expanded = ft_strjoin_free(expanded, tmp);
 	return (expanded);
 }
 

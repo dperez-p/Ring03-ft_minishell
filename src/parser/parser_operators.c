@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:55:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/13 12:22:09 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:26:32 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ static t_ast	*get_redir_node(t_data *minishell, t_token *token,
 	t_token	*left_tokens;
 	t_token	*right_tokens;
 
-	node = malloc(sizeof(t_ast));
+	node = new_node(operator->id);
 	if (!node)
 		handle_error(MALLOC);
 	left_tokens = token;
 	right_tokens = operator->next;
 	if (operator->prev)
+	{
 		operator->prev->next = NULL;
-	operator->next = NULL;
-	node->id = operator->id;
+		operator->next = NULL;
+	}
 	node->left = build_tree(minishell, left_tokens);
 	node->right = build_tree(minishell, right_tokens);
 	return (node);
@@ -64,23 +65,20 @@ t_ast	*parse_redir(t_data *minishell, t_token *token, t_token *operator)
 t_ast	*parse_operator(t_data *minishell, t_token *token, t_token *operator)
 {
 	t_ast	*node;
-	t_token	*left_tokens;
 	t_token	*right_tokens;
 
-	node = malloc(sizeof(t_ast));
+	if (!token || !operator)
+		return (NULL);
+	node = new_node(operator->id);
 	if (!node)
 		handle_error(MALLOC);
-	left_tokens = token;
-	right_tokens = operator->next;
-	operator->prev->next = NULL;
-	operator->next = NULL;
-	node->id = operator->id;
-	node->left = build_tree(minishell, left_tokens);
+	right_tokens = split_token_list(token, operator);
+	node->left = build_tree(minishell, token);
 	node->right = build_tree(minishell, right_tokens);
 	return (node);
 }
 
-/* Parses a sequence of ARG tokens into an AST node */
+/* Parses a simple command (ARG tokens) into an AST node */
 t_ast	*parse_token(t_token *token)
 {
 	t_ast	*node;
@@ -90,6 +88,10 @@ t_ast	*parse_token(t_token *token)
 		return (NULL);
 	node = new_node(token->id);
 	if (!node)
+		handle_error(MALLOC);
+	count = arg_count(token);
+	node->args = malloc(sizeof(char *) * (count + 1));
+	if (!node->args)
 		handle_error(MALLOC);
 	count = 0;
 	while (token && token->id == ARG)

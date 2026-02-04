@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:58:16 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:25:47 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,8 @@ int		is_subshell(t_token *token);
 t_ast	*new_node(int id);
 t_ast	*build_tree(t_data *minishell, t_token *token);
 void	free_ast(t_ast *node);
+t_token	*split_token_list(t_token *token, t_token *operator);
+int		arg_count(t_token *token);
 
 /* Signals */
 void	handle_heredoc(int signum);

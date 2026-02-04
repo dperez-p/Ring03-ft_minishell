@@ -82,7 +82,7 @@ int	loop_tree(t_data *minishell, t_ast *ast)
 	i = 0;
 	if (ast == NULL)
 		return (0);
-	if (ast->args == NULL)
+	if (ast->args != NULL)
 	{
 		ast->args = expansor(minishell, ast->args);
 		while (ast->args[i] && ast->args[i][0] == '\0')
