@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 11:08:27 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 11:54:42 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:51:23 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ char	*find_command(t_data *minishell, char *cmd, int *result)
 	full_path = command_check(cmd, result);
 	if (full_path)
 		return (full_path);
+	paths = NULL;
 	if (*result != 0)
-		paths = split_path(minishell);
+		return (NULL);
+	paths = split_path(minishell);
 	if (!paths)
 		return (NULL);
 	i = 0;
