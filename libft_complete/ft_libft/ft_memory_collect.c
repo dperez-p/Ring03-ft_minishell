@@ -6,12 +6,13 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 19:38:07 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/12 12:21:15 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:40:19 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/* Returns a pointer to the static memory tracking list */
 t_list	**get_memory_ptr(void)
 {
 	static t_list	*ptr;
@@ -19,11 +20,13 @@ t_list	**get_memory_ptr(void)
 	return (&ptr);
 }
 
+/* Add allocated memory to the tracking list */
 void	collect_mem(void *content)
 {
 	ft_lstadd_front(get_memory_ptr(), ft_lstnew(content));
 }
 
+/* Allocates memory and tracks it for later deallocation */
 void	*allocate_mem(size_t nmemb, size_t size)
 {
 	void	*p;
@@ -33,6 +36,7 @@ void	*allocate_mem(size_t nmemb, size_t size)
 	return (p);
 }
 
+/* Frees all tracked memory and clears the tracking list */
 void	deallocate_mem(void *content)
 {
 	t_list	**mem_list;
@@ -62,6 +66,7 @@ void	deallocate_mem(void *content)
 	}
 }
 
+/* Frees all tracked memory and clears the tracking list */
 void	clear_mem(void)
 {
 	ft_lstclear(get_memory_ptr(), &free);

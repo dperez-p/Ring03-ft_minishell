@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:08:36 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/05/17 09:01:52 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:49:53 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		l1 = ft_strlen(s1);
 		l2 = ft_strlen(s2);
-		new = (char *)malloc (sizeof(char) * (l1 + l2 + 1));
+		new = allocate_mem(l1 + l2 + 1, sizeof(char));
 		if (!new)
 			return (0);
 		count = -1;

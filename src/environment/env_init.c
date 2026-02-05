@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:38:14 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/05 20:23:06 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:42:42 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_lev	*create_env_node(char **arr_ev)
 			temp = ft_strjoin(new_node->value, "=");
 		else
 			temp = ft_strdup(new_node->value);
-		free(new_node->value);
+		deallocate_mem(new_node->value);
 		new_node->value = ft_strjoin_free(temp, value);
 		i++;
 	}

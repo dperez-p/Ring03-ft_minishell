@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 09:54:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/05 20:30:35 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:44:19 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**realloc_matches_array(char **matches, const char *new_match,
 	}
 	new_array[i] = ft_strdup(new_match);
 	new_array[i + 1] = NULL;
-	free(matches);
+	ft_free_matrix(matches);
 	return (new_array);
 }
 

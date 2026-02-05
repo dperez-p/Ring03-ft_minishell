@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:39:47 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/05/17 08:57:15 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:47:10 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**ft_split(char const *s, char c)
 
 	a = 0;
 	n_words = ft_c_words(s, c);
-	result = (char **)malloc(sizeof(char *) * (n_words + 1));
+	result = allocate_mem(n_words + 1, sizeof(char *));
 	if (!result || !s)
 		return (NULL);
 	while (a < n_words)
@@ -79,7 +79,7 @@ char	**ft_split(char const *s, char c)
 		while (*s == c)
 			s++;
 		str_l = ft_nchar((const char *)s, c);
-		result[a] = (char *)malloc(sizeof(char) * (str_l + 1));
+		result[a] = allocate_mem(str_l + 1, sizeof(char));
 		if (!result[a])
 			return (ft_free_array((const char **)result, a));
 		ft_strlcpy(result[a], s, str_l + 1);
