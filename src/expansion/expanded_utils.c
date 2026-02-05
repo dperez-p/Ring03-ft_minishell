@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 09:54:54 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 11:49:41 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:30:35 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ char	**realloc_matches_array(char **matches, const char *new_match,
 	char	**new_array;
 	int		i;
 
-	new_array = malloc(sizeof(char *) * (count + 2));
-	if (!new_array)
-		handle_error(MALLOC);
+	new_array = allocate_mem(count + 2, sizeof(char *));
 	i = 0;
 	while (i < count)
 	{

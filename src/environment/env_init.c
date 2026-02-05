@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:38:14 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 11:38:58 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:23:06 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**separate_ev(char *ev)
 	len_key = 0;
 	while (ev[len_key] && ev[len_key] != '=')
 		len_key++;
-	key = allocate_mem(len_key + 1, sizeof(char));
+	key = allocate_mem(len_key + 2, sizeof(char));
 	ft_strlcpy(key, ev, len_key + 1);
 	if (ev[len_key] == '=')
 	{

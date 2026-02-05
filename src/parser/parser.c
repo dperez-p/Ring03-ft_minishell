@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:29:08 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:55:24 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:36:02 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_ast	*new_node(int id)
 {
 	t_ast	*node;
 
-	node = malloc(sizeof(t_ast));
+	node = allocate_mem(1, sizeof(t_ast));
 	if (!node)
 		handle_error(MALLOC);
 	node->id = id;
@@ -30,24 +30,12 @@ t_ast	*new_node(int id)
 /* Frees the memory allocated for an AST node and its children */
 void	free_ast(t_ast *node)
 {
-	int	i;
-
 	if (!node)
 		return ;
-	if (node->args)
-	{
-		i = 0;
-		while (node->args[i])
-		{
-			free(node->args[i]);
-			i++;
-		}
-		free(node->args);
-	}
 	free_ast(node->left);
 	free_ast(node->right);
-	free(node);
-	return ;
+	ft_free_matrix(node->args);
+	deallocate_mem(node);
 }
 
 /* Main function to build the AST from the token list */

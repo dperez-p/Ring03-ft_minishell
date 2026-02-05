@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 09:00:10 by dperez-p          #+#    #+#             */
-/*   Updated: 2025/05/17 08:59:14 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:18:36 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ char	*ft_strdup(const char *s)
 	{
 		size++;
 	}
-	str = malloc(sizeof(char) * (size + 1));
+	str = allocate_mem(size + 1, sizeof(char));
 	a = 0;
 	if (!str)
 	{
 		return (0);
 	}
-	while (s[a])
+	while (s[a] != '\0')
 	{
 		str[a] = s[a];
 		a++;

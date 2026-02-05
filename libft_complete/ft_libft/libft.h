@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:34:03 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:49:03 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:25:02 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void	*));
 
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
-void	ft_free_matrix(char **array);
+void	*ft_free_matrix(char **array);
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
