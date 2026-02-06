@@ -16,7 +16,6 @@
 void	handle_error(char *error)
 {
 	printf("%s\n", error);
-	clear_mem();
 	exit(EXIT_FAILURE);
 }
 

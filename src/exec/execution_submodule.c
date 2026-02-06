@@ -24,7 +24,7 @@ int	execute_submodule(t_data *minishell, t_ast *ast)
 	{
 		status = loop_tree(minishell, ast);
 		close_fd(minishell->fd_bk);
-		clear_mem();
+		free_minishell(minishell);
 		exit(status);
 	}
 	else

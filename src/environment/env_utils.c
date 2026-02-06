@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 19:09:44 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/05 20:30:35 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:31:39 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,29 @@ int	remove_env_node(t_lev **lev, char *key)
 	deallocate_mem(node->value);
 	deallocate_mem(node);
 	return (0);
+}
+
+/* Frees the environment variable list */
+void	free_env_list(t_lev **lev)
+{
+	t_lev	*current;
+	t_lev	*next;
+
+	if (!lev)
+		return ;
+	if (*lev)
+	{
+		current = *lev;
+		while (current)
+		{
+			next = current->next;
+			if (current->key)
+				free(current->key);
+			if (current->value)
+				free(current->value);
+			free(current);
+			current = next;
+		}
+	}
+	free(lev);
 }

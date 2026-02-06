@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 16:25:47 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:29:43 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ t_lev	**init_env_list(t_data *minishell);
 t_lev	*findlev(t_lev *lev, const char *key);
 char	**convert_lev_to_array(t_data *minishell);
 int		remove_env_node(t_lev **lev, char *key);
+void	free_env_list(t_lev **lev);
 
 /* Expansion*/
 char	**split_tokens(char *expanded);
@@ -196,6 +197,7 @@ char	*ft_strjoin_free(char *s1, char *s2);
 
 /* Init */
 t_data	*init_minishell(char **ev);
+void	free_minishell(t_data *minishell);
 
 /* Input */
 int		check_syntax(t_data *minishell, t_token *token);
@@ -245,5 +247,6 @@ char	*concatenate(const char *s1, const char *s2, const char *s3);
 void	close_fd(int *fd);
 int		skip_zeros(const char *num);
 void	restore_fd(int *fd);
+void	free_minishell(t_data *minishell);
 
 #endif

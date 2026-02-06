@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:52:54 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:49:13 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	finish(t_data *minishell)
 	else
 		exit_status = minishell->status;
 	close_fd(minishell->fd_bk);
-	clear_mem();
+	free_minishell(minishell);
 	exit(exit_status);
 }
 
@@ -62,13 +62,13 @@ static void	run(t_data *minishell)
 				root = build_tree(minishell, *minishell->token);
 				if (!root)
 					handle_error(MALLOC);
-				minishell->ast = &root;
+				*minishell->ast = root;
 				if (g_signal == SIGINT)
 					update_exit_status(minishell, SIGINT + 128);
 				else
 					update_exit_status(minishell, execute_command(minishell));
 				free_ast(root);
-				minishell->ast = NULL;
+				*minishell->ast = NULL;
 			}
 		}
 	}

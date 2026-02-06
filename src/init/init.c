@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:19:42 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 13:24:53 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:49:16 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ t_data	*init_minishell(char **ev)
 	minishell->fd_bk[1] = dup(STDOUT_FILENO);
 	if (minishell->fd_bk[0] == -1 || minishell->fd_bk[1] == -1)
 		handle_error(DUP_ERR);
+	minishell->ast = malloc(sizeof(t_ast *));
+	if (!minishell->ast)
+		handle_error(MALLOC);
+	*minishell->ast = NULL;
 	minishell->heredoc_num = 0;
 	minishell->status = 0;
 	return (minishell);

@@ -23,7 +23,7 @@ static void	pipe_children(t_data *minishell, t_ast *ast, int fd[2], int index)
 	close_fd(fd);
 	status = loop_tree(minishell, ast);
 	close_fd(minishell->fd_bk);
-	clear_mem();
+	free_minishell(minishell);
 	exit(status);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:20:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:56:56 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:40:29 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ t_token	**tokenize_input(char *input)
 			id = get_id(input);
 			current_token = extract_token(input, id);
 			new_token = create_token(current_token, id);
-			deallocate_mem(current_token);
 			add_token(tokens, new_token);
 			input += token_length(current_token, id);
 		}

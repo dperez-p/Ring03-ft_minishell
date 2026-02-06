@@ -56,7 +56,8 @@ SRC		=	main.c \
 			tokenizer/token_utils.c \
 			tokenizer/tokenizer_input.c \
 			utils/handle_errors.c \
-			utils/utils.c
+			utils/utils.c \
+			utils/free_minishell.c
 
 SRCS	=		$(addprefix $(SRC_DIR), $(SRC))
 
