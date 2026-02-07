@@ -86,7 +86,7 @@ int	execute_redir(t_data *minishell, t_ast *ast, int id)
 	if (file_fd < 0)
 		return (print_error(INVALID_FILE, 1, "open", ast->right->args[0]));
 	standard = get_standard(id);
-	if (dup2(file_fd, standard))
+	if (dup2(file_fd, standard) == -1)
 	{
 		close(file_fd);
 		handle_error(DUP_ERR);

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 20:33:55 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/28 14:07:28 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:55:08 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ void	free_tokens(t_token **tokens)
 		current = next;
 	}
 	*tokens = NULL;
+}
+
+/* Frees a single token node */
+void	free_token_node(t_token *token)
+{
+	if (!token)
+		return ;
+	if (token->value)
+		free(token->value);
+	free(token);
 }

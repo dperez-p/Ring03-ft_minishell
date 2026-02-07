@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 13:08:05 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/05 20:23:06 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:22:08 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ char	*remove_quotes(char *str)
 		else if ((str[i] == '\"' || str[i] == '\'') && quote == '\0')
 			quote = str[i];
 		else
-			result[j] = str[i];
-		j++;
+			result[j++] = str[i];
 		i++;
 	}
 	result[j] = '\0';
@@ -46,11 +45,13 @@ static void	append_split_token(char ***split, char *expanded, int start,
 	int end)
 {
 	char	*tmp;
+	char	*sub;
 
 	if (end > start)
 	{
-		tmp = ft_substr(expanded, start, end - start);
-		tmp = remove_quotes(tmp);
+		sub = ft_substr(expanded, start, end - start);
+		tmp = remove_quotes(sub);
+		free(sub);
 		*split = realloc_matches_array(*split, tmp, ft_array_len(*split));
 		free(tmp);
 	}

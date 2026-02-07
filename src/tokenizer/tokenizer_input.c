@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:20:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/06 18:40:29 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:17:10 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 /* Extracts the token ID from the input string */
 static int	get_id(const char *token)
 {
-	if (token[0] == '|')
-		return (PIPE);
-	else if (token[0] == '&' && token[1] == '&')
+	if (token[0] == '&' && token[1] == '&')
 		return (AND);
 	else if (token[0] == '|' && token[1] == '|')
 		return (OR);
+	else if (token[0] == '|')
+		return (PIPE);
 	else if (token[0] == '<' && token[1] == '<')
 		return (HEREDOC);
 	else if (token[0] == '>' && token[1] == '>')

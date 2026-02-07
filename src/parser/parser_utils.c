@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:22:06 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 16:25:42 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:55:08 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,51 @@ int	arg_count(t_token *token)
 	return (count);
 }
 
+/* Helper function to find the matching closing parenthesis */
+static t_token	*find_matching_end(t_token *token)
+{
+	int		rec;
+	t_token	*curr;
+
+	rec = 1;
+	curr = token->next;
+	while (curr)
+	{
+		if (curr->id == PAREN_OPEN)
+			rec++;
+		else if (curr->id == PAREN_CLOSE)
+		{
+			rec--;
+			if (rec == 0)
+				return (curr);
+		}
+		curr = curr->next;
+	}
+	return (NULL);
+}
+
 /* Function to remove outer parentheses from a token list */
 t_token	*remove_outer_parentheses(t_token *token)
 {
-	t_token	*current;
-	t_token	*new_start;
-	t_token	*new_end;
+	t_token	*end;
+	t_token	*new;
 
 	if (!token || token->id != PAREN_OPEN)
 		return (token);
-	current = token;
-	while (current && current->id != PAREN_CLOSE)
-		current = current->next;
-	if (!current)
+	end = find_matching_end(token);
+	if (!end)
 		return (token);
-	new_start = token->next;
-	new_end = current->prev;
-	if (new_start)
-		new_start->prev = NULL;
-	if (new_end)
-		new_end->next = NULL;
-	return (new_start);
+	new = token->next;
+	if (token->next == end)
+		new = NULL;
+	else
+	{
+		token->next->prev = NULL;
+		end->prev->next = NULL;
+	}
+	free_token_node(token);
+	free_token_node(end);
+	return (new);
 }
 
 /* Function to check if the tokens form a valid shellcommand structure */
@@ -75,6 +99,7 @@ int	is_subshell(t_token *token)
 			parenthesis_count--;
 		if (parenthesis_count == 0 && current != last)
 			return (0);
+		current = current->next;
 	}
 	return (1);
 }

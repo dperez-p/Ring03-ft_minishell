@@ -58,3 +58,26 @@ t_token	*find_main_operator(t_token *token)
 	}
 	return (main_operator);
 }
+
+/* Function to search for the first redirection token at the top level */
+t_token	*search_redir(t_token *token)
+{
+	t_token	*current;
+	int		parenthesis_count;
+
+	current = token;
+	parenthesis_count = 0;
+	while (current)
+	{
+		if (current->id == PAREN_OPEN)
+			parenthesis_count++;
+		else if (current->id == PAREN_CLOSE)
+			parenthesis_count--;
+		else if ((current->id == REDIR_IN || current->id == REDIR_OUT
+				|| current->id == HEREDOC || current->id == APPEND)
+			&& parenthesis_count == 0)
+			return (current);
+		current = current->next;
+	}
+	return (NULL);
+}

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 18:55:17 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 16:26:32 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 20:02:24 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static t_ast	*get_redir_node(t_data *minishell, t_token *token,
 		operator->prev->next = NULL;
 		operator->next = NULL;
 	}
+	free_token_node(operator);
 	node->left = build_tree(minishell, left_tokens);
 	node->right = build_tree(minishell, right_tokens);
 	return (node);
@@ -53,7 +54,8 @@ t_ast	*parse_redir(t_data *minishell, t_token *token, t_token *operator)
 		operator->prev->next = operator->next->next;
 		if (operator->next->next)
 			operator->next->next->prev = operator->prev;
-		operator->next = NULL;
+		if (operator->next)
+			operator->next->next = NULL;
 		operator->prev = NULL;
 	}
 	if (operator->id == HEREDOC)
@@ -73,6 +75,7 @@ t_ast	*parse_operator(t_data *minishell, t_token *token, t_token *operator)
 	if (!node)
 		handle_error(MALLOC);
 	right_tokens = split_token_list(token, operator);
+	free_token_node(operator);
 	node->left = build_tree(minishell, token);
 	node->right = build_tree(minishell, right_tokens);
 	return (node);
@@ -83,12 +86,11 @@ t_ast	*parse_token(t_token *token)
 {
 	t_ast	*node;
 	int		count;
+	t_token	*tmp;
 
 	if (!token || token->id != ARG)
 		return (NULL);
 	node = new_node(token->id);
-	if (!node)
-		handle_error(MALLOC);
 	count = arg_count(token);
 	node->args = malloc(sizeof(char *) * (count + 1));
 	if (!node->args)
@@ -98,11 +100,11 @@ t_ast	*parse_token(t_token *token)
 	{
 		node->args[count] = ft_strdup(token->value);
 		if (!node->args[count])
-		{
 			handle_error(MALLOC);
-		}
 		count++;
+		tmp = token;
 		token = token->next;
+		free_token_node(tmp);
 	}
 	node->args[count] = NULL;
 	return (node);

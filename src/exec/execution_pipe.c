@@ -18,7 +18,7 @@ static void	pipe_children(t_data *minishell, t_ast *ast, int fd[2], int index)
 {
 	int	status;
 
-	if (dup2(fd[index], index == -1))
+	if (dup2(fd[index], index) == -1)
 		handle_error(DUP_ERR);
 	close_fd(fd);
 	status = loop_tree(minishell, ast);

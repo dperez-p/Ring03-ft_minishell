@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:51:09 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/06 18:29:43 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:43:33 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ t_ast	*parse_token(t_token *token);
 t_ast	*parse_subshell(t_data *minishell, t_token *token);
 t_token	*search_pipeline(t_token *token);
 t_token	*find_main_operator(t_token *token);
+t_token	*search_redir(t_token *token);
 t_token	*remove_outer_parentheses(t_token *token);
 int		is_subshell(t_token *token);
 t_ast	*new_node(int id);
@@ -235,6 +236,7 @@ void	interactive_signals(void);
 t_token	*create_token(char *value, int id);
 void	add_token(t_token **tokens, t_token *new_token);
 void	free_tokens(t_token **tokens);
+void	free_token_node(t_token *token);
 char	*extract_token(const char *input, int id);
 t_token	**tokenize_input(char *input);
 int		token_length(const char *str, int id);

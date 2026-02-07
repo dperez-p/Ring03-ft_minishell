@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 10:51:47 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 12:15:51 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:44:00 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ static int	check_open_syntax(char *str)
 
 	paren = 0;
 	quote = '\0';
-	if (!check_open_quotes(str))
-		return (0);
 	while (*str)
 	{
 		if (!quote && (*str == '\'' || *str == '\"'))
@@ -108,7 +106,11 @@ int	check_empty_input(char *str)
  characters returns 0 if valid, or a syntax error if any check fails */
 int	check_input_syntax(char *str)
 {
-	if (!check_open_syntax(str) || !check_special_chars(str))
-		return (print_error(SYNTAX, 2, NULL, NULL));
+	if (!check_open_quotes(str))
+		return (print_error(QUOTES, 2, NULL, NULL));
+	if (!check_open_syntax(str))
+		return (print_error(SYNTAX, 2, NULL, "newline"));
+	if (!check_special_chars(str))
+		return (print_error(INVALID_INPUT, 2, str, NULL));
 	return (0);
 }

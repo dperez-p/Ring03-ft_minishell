@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 18:50:39 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/06 18:49:13 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:06:06 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,16 @@ static void	iteration_init(t_data *minishell)
 {
 	interactive_signals();
 	if (minishell->input)
+	{
 		free(minishell->input);
+		minishell->input = NULL;
+	}
+	if (minishell->token)
+	{
+		free_tokens(minishell->token);
+		free(minishell->token);
+		minishell->token = NULL;
+	}
 	remove_heredoc_files(minishell);
 }
 
@@ -62,6 +71,7 @@ static void	run(t_data *minishell)
 				root = build_tree(minishell, *minishell->token);
 				if (!root)
 					handle_error(MALLOC);
+				*minishell->token = NULL;
 				*minishell->ast = root;
 				if (g_signal == SIGINT)
 					update_exit_status(minishell, SIGINT + 128);

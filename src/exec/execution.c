@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:48:30 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/29 11:39:10 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:21:04 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	execute_or(t_data *minishell, t_ast *ast)
 	result = 0;
 	if (ast->left)
 		result = loop_tree(minishell, ast->left);
-	if (result == 0 && ast->right)
+	if (result != 0 && ast->right)
 		result = loop_tree(minishell, ast->right);
 	return (result);
 }

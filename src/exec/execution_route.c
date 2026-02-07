@@ -26,7 +26,7 @@ void	execute_child_command(char *command, char **args, t_data *minishell)
 		execve(command, args, envp);
 	}
 	restore_fd(minishell->fd_bk);
-	print_error(EXECVE, -1, command, NULL);
+	exit(print_error(EXECVE, 126, command, NULL));
 }
 
 /* Waits for child process and captures its exit status. returns the exit
