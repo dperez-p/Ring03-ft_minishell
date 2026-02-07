@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:12:01 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/04 13:26:27 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:05:02 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ bool	ft_get_strchr(const char *s, int c)
 	}
 	return (false);
 }
-
