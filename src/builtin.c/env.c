@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 13:30:20 by najlghar          #+#    #+#             */
-/*   Updated: 2026/02/01 12:41:29 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 13:44:29 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	env(t_lev **lev, char **args)
 	current = *lev;
 	while (current)
 	{
-		if (current->value && current->value[0] != '\0')
+		if (current->value)
 		{
 			ft_putstr_fd(current->key, STDOUT_FILENO);
 			ft_putchar_fd('=', STDOUT_FILENO);

@@ -6,12 +6,13 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:32:20 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/08 15:34:08 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:59:33 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/* Helper function to expand variables in a heredoc line */
 static char	*expand_line(t_data *minishell, char *line)
 {
 	int		i;
