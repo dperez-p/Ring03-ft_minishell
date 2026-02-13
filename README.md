@@ -52,6 +52,7 @@ Para hacer este proyecto nos hemos vasado en varias fuentes:
 - El manual oficial de GNU Bash.
 - `man readline` para entender como leer la linea de comandos.
 - Documentacion sobre las funciones de sistema `fork`, `execve`, `pipe`, `dup2`.
+- Tutorial de simpleshell para entender en profundidad el funcionamiento: https://www.youtube.com/watch?v=2xayf6AMNtU&list=PLLT0FgF-zMXPcWHLCsZUl6soZqk59CPHg
 
 ### Uso de IA
 Hemos utilizado herramientas de Inteligencia Artificial (Copilot, ChatGPT) para algunas tareas:
