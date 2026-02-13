@@ -30,5 +30,6 @@ void	free_minishell(t_data *minishell)
 		free(minishell->ast);
 	if (minishell->input)
 		free(minishell->input);
+	rl_clear_history();
 	free(minishell);
 }

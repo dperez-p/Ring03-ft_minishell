@@ -21,7 +21,7 @@ void	print_export(t_lev **lev)
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(current->key, STDOUT_FILENO);
-		if (current->value && current->value[0] != '\0')
+		if (current->value)
 		{
 			ft_putstr_fd("=\"", STDOUT_FILENO);
 			ft_putstr_fd(current->value, STDOUT_FILENO);

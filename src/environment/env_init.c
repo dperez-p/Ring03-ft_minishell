@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 12:38:14 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/02/05 20:42:42 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:17:21 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,15 @@
 t_lev	*create_env_node(char **arr_ev)
 {
 	t_lev	*new_node;
-	char	*value;
-	char	*temp;
-	int		i;
 
 	new_node = malloc(sizeof(t_lev));
 	if (!new_node)
 		handle_error(MALLOC);
 	new_node->key = ft_strdup(arr_ev[0]);
-	new_node->value = ft_strdup("");
-	i = 1;
-	while (arr_ev[i])
-	{
-		value = ft_strdup(arr_ev[i]);
-		if (i > 1)
-			temp = ft_strjoin(new_node->value, "=");
-		else
-			temp = ft_strdup(new_node->value);
-		deallocate_mem(new_node->value);
-		new_node->value = ft_strjoin_free(temp, value);
-		i++;
-	}
+	if (arr_ev[1])
+		new_node->value = ft_strdup(arr_ev[1]);
+	else
+		new_node->value = NULL;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);

@@ -49,7 +49,7 @@ static void	heredoc_write(t_data *minishell, char *delimiter, int fd)
 			free(line);
 			return ;
 		}
-		if (!line || ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
+		if (!line || ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1) == 0)
 		{
 			if (!line)
 				ft_printf_fd(2,

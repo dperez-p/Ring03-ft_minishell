@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: najlghar <najlghar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 14:26:33 by najlghar          #+#    #+#             */
-/*   Updated: 2026/02/11 14:11:03 by najlghar         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:48:40 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// Function to check if the argument is a valid '-n' flag for echo
+/* Checks if the argument is a valid -n flag (only -n) */
 static int	is_n_flag(char *arg)
 {
 	int	i;
@@ -29,7 +29,7 @@ static int	is_n_flag(char *arg)
 	return (1);
 }
 
-// Function to implement the echo command
+/* Implementation of the echo built-in command */
 int	echo(char **args)
 {
 	int	i;

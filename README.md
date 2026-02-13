@@ -44,6 +44,10 @@ Una vez compilado, puedes iniciar la shell con:
 ./minishell
 ```
 
+```Silenciar readline stillrecheable
+valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
+```
+
 Funciona como cualquier otra shell, puedes probar comandos tipicos como `ls -l | grep .c` o navegar por directorios.
 
 ## Recursos
