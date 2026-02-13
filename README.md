@@ -56,6 +56,9 @@ Para hacer este proyecto nos hemos vasado en varias fuentes:
 
 ### Uso de IA
 Hemos utilizado herramientas de Inteligencia Artificial (Copilot, ChatGPT) para algunas tareas:
+
+- **Generación de pseudocodigo** Se utilizo para encaminar la dirección de el proyecto generando pseudocodigo
+y los apartados.
 - **Explicación de conceptos:** Para entender mejor como funciona la gestion de señales y el arbol de ejecucion de procesos.
 - **Debugging:** Para encontrar errores dificiles de memoria o segfaults puntuales y entender los mensajes de valgrind.
 - **Generación de documentación:** Para ayudar a redactar este archivo README y estructurar la informacion de forma clara.
