@@ -1,68 +1,68 @@
-*Este proyecto ha sido creado como parte del currículo de 42 por dperez-p, najlghar.*
+*This project has been created as part of the 42 curriculum by dperez-p, najlghar.*
 
 # Minishell
 
-## Descripción
-Este proyecto es nuestra version de una shell basica, inspirada en bash. El objectivo principal era aprender como funciona una terminal por dentro, manejando procesos, file descriptors y memoria.
+## Description
+This project is our version of a basic shell, inspired by bash. The main objective was to learn how a terminal works internally, handling processes, file descriptors, and memory.
 
-El programa es capaz de:
-- Mostrar un prompt para escribir comandos.
-- Buscar y ejecutar ejecutables basandose en la variable PATH.
-- Manejar comillas simples y dobles.
-- Implementar redirecciones: input (`<`), output (`>`), append (`>>`) y here-doc (`<<`).
-- Usar tuberias (`|`) para conectar comandos.
-- Manejar señales como ctrl-C, ctrl-D y ctrl-\.
-- Gestionar variables de entorno.
+ The program is capable of:
+- Showing a prompt to type commands.
+- Searching and executing executables based on the PATH variable.
+- Handling single and double quotes.
+- Implementing redirections: input (`<`), output (`>`), append (`>>`) and here-doc (`<<`).
+- Using pipes (`|`) to connect commands.
+- Handling signals like ctrl-C, ctrl-D and ctrl-\.
+- Managing environment variables.
 
-Ademas, hemos recreado los siguientes builtins:
-- `echo` con la opcion -n
-- `cd` con ruta relativa o absoluta
+Additionally, we have recreated the following builtins:
+- `echo` with option -n
+- `cd` with a relative or absolute path
 - `pwd`
 - `export`
 - `unset`
 - `env`
 - `exit`
 
-## Instrucciones
+## Instructions
 
-### Requisitos
-Necesitas tener instalada la libreria `readline` y un compilador como `cc` o `gcc`.
+### Requirements
+You need to have the `readline` library installed and a compiler like `cc` or `gcc`.
 
-### Compilación
-Para compilar el proyecto, simplemente ejecuta el comando `make` en la terminal dentro de la carpeta del proyecto:
+### Compilation
+To compile the project, simply run the `make` command in the terminal inside the project folder:
 
 ```bash
 make
 ```
 
-Esto creará el ejecutable `minishell`.
+This will create the `minishell` executable.
 
-### Ejecución
-Una vez compilado, puedes iniciar la shell con:
+### Execution
+Once compiled, you can start the shell with:
 
 ```bash
 ./minishell
 ```
 
-```Silenciar readline stillrecheable
+```Silencing readline stillrecheable
 valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
 ```
 
-Funciona como cualquier otra shell, puedes probar comandos tipicos como `ls -l | grep .c` o navegar por directorios.
+It works like any other shell, you can try typical commands like `ls -l | grep .c` or navigate through directories.
 
-## Recursos
+## Resources
 
-Para hacer este proyecto nos hemos vasado en varias fuentes:
-- El manual oficial de GNU Bash.
-- `man readline` para entender como leer la linea de comandos.
-- Documentacion sobre las funciones de sistema `fork`, `execve`, `pipe`, `dup2`.
-- Tutorial de simpleshell para entender en profundidad el funcionamiento: https://www.youtube.com/watch?v=2xayf6AMNtU&list=PLLT0FgF-zMXPcWHLCsZUl6soZqk59CPHg
+To do this project we have based ourselves on several sources:
+- The GNU Bash official manual.
+- `man readline` to understand how to read the command line.
+- Documentation on system functions `fork`, `execve`, `pipe`, `dup2`.
+- Simpleshell tutorial to understand in depth the operation: https://www.youtube.com/watch?v=2xayf6AMNtU&list=PLLT0FgF-zMXPcWHLCsZUl6soZqk59CPHg
 
-### Uso de IA
-Hemos utilizado herramientas de Inteligencia Artificial (Copilot, ChatGPT) para algunas tareas:
+### AI Usage
+We have used Artificial Intelligence tools (Copilot, ChatGPT) for some tasks:
 
-- **Generación de pseudocodigo** Se utilizo para encaminar la dirección de el proyecto generando pseudocodigo
-y los apartados.
-- **Explicación de conceptos:** Para entender mejor como funciona la gestion de señales y el arbol de ejecucion de procesos.
-- **Debugging:** Para encontrar errores dificiles de memoria o segfaults puntuales y entender los mensajes de valgrind.
-- **Generación de documentación:** Para ayudar a redactar este archivo README y estructurar la informacion de forma clara.
+- **Pseudocode generation** Used to guide the direction of the project by generating pseudocode
+and sections.
+- **Concept explanation:** To better understand how signal handling and the process execution tree work.
+- **Debugging:** To find difficult memory errors or specific segfaults and understand valgrind messages.
+- **Documentation generation:** To help draft this README file and structure the information clearly.

@@ -6,7 +6,7 @@
 /*   By: dperez-p <dperez-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:43:31 by dperez-p          #+#    #+#             */
-/*   Updated: 2026/01/26 10:52:03 by dperez-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:32:50 by dperez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	handle_heredoc(int signum)
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
+	g_signal = SIGINT;
+	close(STDIN_FILENO);
 }
 
 /* Signal handler for SIGPIPE in child processes */
